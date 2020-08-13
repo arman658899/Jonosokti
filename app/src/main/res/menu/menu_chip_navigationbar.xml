@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cnb_unselectedColor="@color/colorWhite">
+    <item android:id="@+id/bottom_home"
+        android:title="@string/home"
+        android:icon="@drawable/icon_home"
+        app:cnb_iconColor="@color/colorWhite"
+        app:cnb_backgroundColor="@android:color/holo_blue_bright"        app:cnb_iconTintMode="src_in"
+        />
+    <item android:id="@+id/bottom_order"
+        android:title="@string/cart"
+        android:icon="@drawable/ic_order"
+        app:cnb_iconColor="@color/colorWhite"
+        app:cnb_backgroundColor="@android:color/holo_blue_bright"
+        app:cnb_iconTintMode="src_in"/>
+    <item android:id="@+id/bottom_cart"
+        android:title="@string/cart"
+        android:icon="@drawable/icon_cart"
+        app:cnb_iconColor="@color/colorWhite"
+        app:cnb_backgroundColor="@android:color/holo_blue_bright"        app:cnb_iconTintMode="src_in"/>
+    <item android:id="@+id/bottom_more"
+        android:title="@string/more"
+        android:icon="@drawable/icon_more"
+        app:cnb_iconColor="@color/colorWhite"
+        app:cnb_backgroundColor="@android:color/holo_blue_bright"        app:cnb_iconTintMode="src_in"/>
+</menu>
