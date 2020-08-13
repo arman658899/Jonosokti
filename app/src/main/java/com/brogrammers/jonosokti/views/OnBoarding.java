@@ -1,19 +1,20 @@
-package com.brogrammers.jonosokti;
+package com.brogrammers.jonosokti.views;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.text.HtmlCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.brogrammers.jonosokti.R;
+import com.brogrammers.jonosokti.adapters.SliderAdapter;
 
 public class OnBoarding extends AppCompatActivity {
     ViewPager viewPager;
@@ -26,7 +27,6 @@ public class OnBoarding extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN );
         setContentView( R.layout.activity_on_boarding );
 
         viewPager=findViewById( R.id.slider );
