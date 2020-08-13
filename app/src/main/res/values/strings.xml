@@ -1,3 +1,64 @@
 <resources>
     <string name="app_name">Jonosokti</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_dialog">What are you looking for?</string>
+    <string name="content_description">Image</string>
+
+    <!--
+    On Boarding
+-->
+    <string name="get_started">Lets Get Started</string>
+    <string name="add_to_cart">Add To Cart</string>
+
+    <string name="products_cart">Products Cart</string>
+    <string name="order_details">Order Details</string>
+
+    <!--More Fragment -->
+    <string name="more_share">Share</string>
+    <string name="more_privacy">Privacy</string>
+    <string name="more_rate">Rate Us</string>
+    <string name="more_language">Language</string>
+
+    <string name="more_language_text">Choose your desire language.</string>
+    <string name="more_share_text">Share Boisabi with your friends</string>
+    <string name="more_rate_text">Rate us our app in Play Store</string>
+    <string name="more_privacy_text">Check privacy and policy</string>
+
+    <string name="facebook_page">Facebook Page</string>
+    <string name="facebook_page_details">Join our Facebook page for online support.</string>
+    <!--
+        Home Fragment
+    -->
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="more">More</string>
+    <!--
+        Category
+    -->
+    <string name="grocery">Grocery</string>
+    <string name="medicine">Medicine</string>
+    <string name="fresh_food">Fresh Food</string>
+    <string name="others_products">Others Products</string>
+
+    <!--
+    Order
+-->
+    <string name="total_order">Total Order</string>
+    <string name="total">Total Bill</string>
+    <string name="checkout">Medicine</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="delivery_charge">Delivery Charge</string>
+    <string name="customer_name">Customer name</string>
+    <string name="full_address">Full Address</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="resend_code">RESEND CODE</string>
+
+    <!--others-->
+    <string name="retry">Retry</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="next_btn">Next</string>
+    <string name="otp_details">To sign into your BazarSodai account, you have to first give your mobile number in below.</string>
+
 </resources>
