@@ -60,5 +60,8 @@
     <string name="verification_code">Verification Code</string>
     <string name="next_btn">Next</string>
     <string name="otp_details">To sign into your BazarSodai account, you have to first give your mobile number in below.</string>
+    <string name="order">Order</string>
+    <string name="profile">Profile</string>
+    <string name="my_order">My Order</string>
 
 </resources>

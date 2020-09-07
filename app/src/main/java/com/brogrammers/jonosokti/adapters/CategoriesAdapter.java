@@ -2,6 +2,7 @@ package com.brogrammers.jonosokti.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,13 +11,16 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.bean.Category;
+import com.brogrammers.jonosokti.listeners.OnCategorySelectListener;
 import com.brogrammers.jonosokti.viewholders.CategoryViewHolder;
 
 public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> {
     private Context context;
-    public CategoriesAdapter(Context context) {
+    private OnCategorySelectListener listener;
+    public CategoriesAdapter(Context context, OnCategorySelectListener listener) {
         super(DIFF_UTIL);
         this.context = context;
+        this.listener = listener;
     }
     private static final DiffUtil.ItemCallback<Category> DIFF_UTIL = new DiffUtil.ItemCallback<Category>() {
         @Override
@@ -39,6 +43,12 @@ public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         holder.tvServiceName.setText(getItem(position).getName());
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onCategorySelected(getItem(position).getName(),position);
+            }
+        });
     }
 
 

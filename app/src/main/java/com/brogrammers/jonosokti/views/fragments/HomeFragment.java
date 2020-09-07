@@ -1,11 +1,13 @@
 package com.brogrammers.jonosokti.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -14,21 +16,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.brogrammers.jonosokti.Constants;
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.CategoriesAdapter;
+import com.brogrammers.jonosokti.adapters.NestedCategoryAdapter;
+import com.brogrammers.jonosokti.adapters.ProductsAdapter;
 import com.brogrammers.jonosokti.bean.Category;
+import com.brogrammers.jonosokti.bean.NestedCategory;
+import com.brogrammers.jonosokti.bean.Product;
+import com.brogrammers.jonosokti.listeners.OnCategorySelectListener;
+import com.brogrammers.jonosokti.views.AllServicesActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+import static com.brogrammers.jonosokti.Constants.CATEGORIES;
+
+public class HomeFragment extends Fragment implements OnCategorySelectListener {
 
     private ViewFlipper viewFlipper;
     private RecyclerView recyclerViewCategories, recyclerViewPopularCategories;
     private List<Category> categories;
-    private List<Category> products;
-    private CategoriesAdapter categoriesAdapter,productsAdapter;
+    private List<Product> products;
+    private List<NestedCategory> nestedCategories;
+    private CategoriesAdapter categoriesAdapter;
+    private NestedCategoryAdapter popularAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -39,16 +53,25 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         categories = new ArrayList<>();
+        nestedCategories = new ArrayList<>();
         products = new ArrayList<>();
-        categoriesAdapter = new CategoriesAdapter(requireActivity());
-        productsAdapter = new CategoriesAdapter(requireActivity());
+        categoriesAdapter = new CategoriesAdapter(requireActivity(),this);
+        popularAdapter = new NestedCategoryAdapter(requireActivity());
 
-        for (int i = 0; i < 30; i++) {
-            categories.add(new Category("Service " + (i + 1)));
-            products.add(new Category("Product " + (i + 1)));
+
+        for (int i = 0; i < CATEGORIES.length; i++) {
+            categories.add(new Category(CATEGORIES[i]));
+            if (i<10) products.add(new Product("Sub-Category"));
         }
         categoriesAdapter.submitList(categories);
-        productsAdapter.submitList(products);
+
+
+
+        for (int i=0; i<5; i++){
+            nestedCategories.add(new NestedCategory("Popular Categories",products));
+        }
+        popularAdapter.submitList(nestedCategories);
+
     }
 
     @Override
@@ -71,8 +94,8 @@ public class HomeFragment extends Fragment {
 
         recyclerViewPopularCategories = view.findViewById(R.id.recyclerview_PopularView_home);
         recyclerViewPopularCategories.setHasFixedSize(true);
-        recyclerViewPopularCategories.setLayoutManager(new GridLayoutManager(requireActivity(), 3));
-        recyclerViewPopularCategories.setAdapter(productsAdapter);
+        recyclerViewPopularCategories.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerViewPopularCategories.setAdapter(popularAdapter);
     }
 
     private void intiViewFlipper() {
@@ -95,5 +118,11 @@ public class HomeFragment extends Fragment {
 
         viewFlipper.startFlipping();
 
+    }
+
+    @Override
+    public void onCategorySelected(String categoryName, int position) {
+        Intent intent = new Intent(requireActivity(), AllServicesActivity.class);
+        startActivity(intent);
     }
 }

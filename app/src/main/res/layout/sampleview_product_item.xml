@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardview_product_container"
     app:cardCornerRadius="8dp"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="6dp"
@@ -23,9 +23,9 @@
 
         <ImageView
             android:id="@+id/imageView_product"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            tools:src="@drawable/shifting"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            tools:src="@drawable/service1"
             />
         <TextView
             android:id="@+id/textview_product_name"

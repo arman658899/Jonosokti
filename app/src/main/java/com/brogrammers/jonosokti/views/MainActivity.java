@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.views.fragments.CartFragment;
 import com.brogrammers.jonosokti.views.fragments.HomeFragment;
-import com.brogrammers.jonosokti.views.fragments.MoreFragment;
+import com.brogrammers.jonosokti.views.fragments.ProfileFragment;
 import com.brogrammers.jonosokti.views.fragments.OrderFragment;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new CartFragment());
                         break;
                     }
-                    case R.id.bottom_more:{
-                        replaceFragment(new MoreFragment());
+                    case R.id.bottom_profile:{
+                        replaceFragment(new ProfileFragment());
                         break;
                     }
                     default: replaceFragment(new HomeFragment());
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment){
         String fragmentName = fragment.getClass().getName();
 
-        boolean popped = getSupportFragmentManager().popBackStackImmediate();
+        boolean popped = getSupportFragmentManager().popBackStackImmediate(fragmentName,0);
         if (!popped && getSupportFragmentManager().findFragmentByTag(fragmentName)==null){
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();

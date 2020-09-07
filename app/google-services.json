@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "274011845578",
+    "firebase_url": "https://jonosokti-app.firebaseio.com",
+    "project_id": "jonosokti-app",
+    "storage_bucket": "jonosokti-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274011845578:android:3dea23cba608cfb97dd533",
+        "android_client_info": {
+          "package_name": "com.brogrammers.jonosokti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274011845578-qcvfh80l6hrhevrv2fkujc8uuessrcib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brogrammers.jonosokti",
+            "certificate_hash": "4e7b5b08bc26b6440afc1fd2b5f0f38003d2ec01"
+          }
+        },
+        {
+          "client_id": "274011845578-cs9sqm4b1n419g2scnbu79nr06nu3ls8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIhbW5Kwknkh_Lj4v9DOZ-7kOPhTrT2b8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274011845578-cs9sqm4b1n419g2scnbu79nr06nu3ls8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

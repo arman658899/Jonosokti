@@ -2,6 +2,9 @@ package com.brogrammers.jonosokti.views.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,11 +13,8 @@ import android.view.ViewGroup;
 
 import com.brogrammers.jonosokti.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CartFragment extends Fragment {
-
+    private Toolbar toolbar;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -25,5 +25,20 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.icon_back_arrow_black);
+        toolbar.setTitle(R.string.cart);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requireActivity().onBackPressed();
+            }
+        });
     }
 }
