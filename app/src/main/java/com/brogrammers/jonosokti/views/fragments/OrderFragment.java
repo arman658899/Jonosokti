@@ -1,4 +1,4 @@
-package com.brogrammers.jonosokti;
+package com.brogrammers.jonosokti.views.fragments;
 
 import android.os.Bundle;
 
@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.brogrammers.jonosokti.R;
+
+
 public class OrderFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
