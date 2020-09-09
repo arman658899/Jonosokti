@@ -3,13 +3,14 @@
     package="com.brogrammers.jonosokti">
 
     <application
+        android:name=".AppInitializer"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.AllServicesActivity"></activity>
+        <activity android:name=".views.AllServicesActivity"/>
         <activity android:name=".views.OnBoarding" />
         <activity android:name=".views.MainActivity" />
         <activity android:name=".views.SplashScreen">

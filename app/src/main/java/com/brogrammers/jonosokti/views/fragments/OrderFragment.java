@@ -14,13 +14,16 @@ import android.view.ViewGroup;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.TabAdapter;
+import com.brogrammers.jonosokti.helpers.ApplicationHelper;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class OrderFragment extends Fragment {
     private Toolbar toolbar;
     private TabLayout tab;
     private ViewPager viewPager;
+
     public OrderFragment() {
     }
 
