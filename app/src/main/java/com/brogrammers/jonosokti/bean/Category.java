@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class Category implements Serializable {
     String categoryName,imageLink,categoryId;
+    int viewed;
 
     public Category() {
     }
 
-    public Category(String categoryName, String imageLink, String categoryId) {
+    public Category(String categoryName, String imageLink, String categoryId, int viewed) {
         this.categoryName = categoryName;
         this.imageLink = imageLink;
         this.categoryId = categoryId;
+        this.viewed = viewed;
     }
 
     public String getCategoryName() {
@@ -28,6 +30,14 @@ public class Category implements Serializable {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public int getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(int viewed) {
+        this.viewed = viewed;
     }
 
     public String getCategoryId() {

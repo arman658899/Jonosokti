@@ -5,8 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.bean.NestedCategory;
@@ -14,14 +13,15 @@ import com.brogrammers.jonosokti.viewholders.NestedCategoryViewHolder;
 
 import java.util.List;
 
-public class NestedCategoryAdapter extends ListAdapter<NestedCategory, NestedCategoryViewHolder> {
+public class NestedCategoryAdapter extends RecyclerView.Adapter<NestedCategoryViewHolder> {
     private Context context;
-    public NestedCategoryAdapter(Context context) {
-        super(diffCallback);
+    private List<NestedCategory> nestedCategories;
+    public NestedCategoryAdapter(Context context, List<NestedCategory> nestedCategories) {
         this.context = context;
+        this.nestedCategories = nestedCategories;
     }
 
-    private static final DiffUtil.ItemCallback<NestedCategory> diffCallback = new DiffUtil.ItemCallback<NestedCategory>() {
+   /* private static final DiffUtil.ItemCallback<NestedCategory> diffCallback = new DiffUtil.ItemCallback<NestedCategory>() {
         @Override
         public boolean areItemsTheSame(@NonNull NestedCategory oldItem, @NonNull NestedCategory newItem) {
             return false;
@@ -31,7 +31,7 @@ public class NestedCategoryAdapter extends ListAdapter<NestedCategory, NestedCat
         public boolean areContentsTheSame(@NonNull NestedCategory oldItem, @NonNull NestedCategory newItem) {
             return false;
         }
-    };
+    };*/
 
     @NonNull
     @Override
@@ -41,10 +41,13 @@ public class NestedCategoryAdapter extends ListAdapter<NestedCategory, NestedCat
 
     @Override
     public void onBindViewHolder(@NonNull NestedCategoryViewHolder holder, int position) {
-        holder.tvCategoryName.setText(getItem(position).getPopularCategory());
-        ProductsAdapter adapter = new ProductsAdapter(context);
-        adapter.submitList(getItem(position).getCategories());
+        holder.tvCategoryName.setText(nestedCategories.get(position).getPopularCategory());
+        SubCategoryHorizontalAdapter adapter = new SubCategoryHorizontalAdapter(context,nestedCategories.get(position).getCategories());
         holder.recyclerView.setAdapter(adapter);
+    }
 
+    @Override
+    public int getItemCount() {
+        return nestedCategories.size();
     }
 }

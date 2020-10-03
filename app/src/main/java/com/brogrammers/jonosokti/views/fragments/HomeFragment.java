@@ -18,31 +18,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
-import com.brogrammers.jonosokti.Constants;
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.CategoriesAdapter;
 import com.brogrammers.jonosokti.adapters.NestedCategoryAdapter;
-import com.brogrammers.jonosokti.adapters.ProductsAdapter;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
-import com.brogrammers.jonosokti.bean.Product;
-import com.brogrammers.jonosokti.listeners.OnCategorySelectListener;
+import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.viewmodels.HomeFragmentViewModel;
-import com.brogrammers.jonosokti.views.AllServicesActivity;
+import com.brogrammers.jonosokti.views.SingleServiceSubCategoriesActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.brogrammers.jonosokti.Constants.CATEGORIES;
-
-public class HomeFragment extends Fragment implements OnCategorySelectListener {
+public class HomeFragment extends Fragment implements OnItemSelectListener<Category> {
 
     private ViewFlipper viewFlipper;
     private RecyclerView recyclerViewCategories, recyclerViewPopularCategories;
     private List<Category> categories;
-    private List<Product> products;
     private List<NestedCategory> nestedCategories;
     private CategoriesAdapter categoriesAdapter;
     private NestedCategoryAdapter popularAdapter;
@@ -61,17 +54,9 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
         super.onCreate(savedInstanceState);
         categories = new ArrayList<>();
         nestedCategories = new ArrayList<>();
-        products = new ArrayList<>();
         categoriesAdapter = new CategoriesAdapter(requireActivity(), this);
-        popularAdapter = new NestedCategoryAdapter(requireActivity());
+        popularAdapter = new NestedCategoryAdapter(requireActivity(),nestedCategories);
         categoriesAdapter.submitList(categories);
-
-
-        for (int i = 0; i < 5; i++) {
-            nestedCategories.add(new NestedCategory("Popular Categories", products));
-        }
-        popularAdapter.submitList(nestedCategories);
-
         viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
 
 
@@ -103,6 +88,8 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
 
         viewModel.getCategoriesLiveData().removeObserver(categoryObserver);
         viewModel.getCategoriesLiveData().observe(requireActivity(), categoryObserver);
+        viewModel.getPopularNestedCategories().removeObserver(nestedCategoyObserver);
+        viewModel.getPopularNestedCategories().observe(requireActivity(),nestedCategoyObserver);
 
     }
 
@@ -112,6 +99,15 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
             categories.clear();
             categories.addAll(categoriesLive);
             categoriesAdapter.submitList(categories);
+        }
+    };
+
+    private Observer<List<NestedCategory>> nestedCategoyObserver = new Observer<List<NestedCategory>>() {
+        @Override
+        public void onChanged(List<NestedCategory> updatedList) {
+            nestedCategories.clear();
+            nestedCategories.addAll(updatedList);
+            popularAdapter.notifyDataSetChanged();
         }
     };
 
@@ -138,8 +134,9 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
     }
 
     @Override
-    public void onCategorySelected(String categoryName, int position) {
-        Intent intent = new Intent(requireActivity(), AllServicesActivity.class);
+    public void onItemSelected(Category category) {
+        Intent intent = new Intent(requireActivity(), SingleServiceSubCategoriesActivity.class);
+        intent.putExtra("category",category);
         startActivity(intent);
     }
 }

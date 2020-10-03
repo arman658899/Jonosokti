@@ -18,39 +18,51 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
-
+    private FragmentManager fragmentManager;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragmentManager = getSupportFragmentManager();
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment=null;
-                if (item.getItemId()==R.id.home)
-                {
-                    fragment=new HomeFragment();
+                if (item.getItemId() == R.id.bottom_home) {
+                    replaceFragment(new HomeFragment());
                     item.setChecked(true);
                 }
-                if (item.getItemId()==R.id.bottom_order)
-                {
-                    fragment=new OrderFragment();
+                if (item.getItemId()==R.id.bottom_order) {
+                    replaceFragment(new OrderFragment());
                     item.setChecked(true);
                 }
-                if (item.getItemId()==R.id.bottom_profile)
-                {
-                    fragment=new ProfileFragment();
+                if (item.getItemId()==R.id.bottom_profile) {
+                    replaceFragment(new ProfileFragment());
                     item.setChecked(true);
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                if (item.getItemId() == R.id.bottom_cart){
+                    replaceFragment(new CartFragment());
+                    item.setChecked(true);
+                }
                 return true;
             }
         });
 
+        if (savedInstanceState==null) replaceFragment(new HomeFragment());
+
+    }
+
+    private void replaceFragment(Fragment fragment){
+        String fragmentName = fragment.getClass().getName();
+
+        boolean popped = fragmentManager.popBackStackImmediate(fragmentName,0);
+        if (!popped && fragmentManager.findFragmentByTag(fragmentName) == null){
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container,fragment,fragmentName);
+            ft.addToBackStack(fragmentName);
+            ft.commit();
+        }
     }
 }

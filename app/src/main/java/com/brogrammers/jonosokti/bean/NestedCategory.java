@@ -6,12 +6,12 @@ import java.util.List;
 
 public class NestedCategory {
     String popularCategory;
-    List<Product> categories;
+    List<SubCategory> categories;
 
     public NestedCategory() {
     }
 
-    public NestedCategory(String popularCategory, List<Product> categories) {
+    public NestedCategory(String popularCategory, List<SubCategory> categories) {
         this.popularCategory = popularCategory;
         this.categories = categories;
     }
@@ -24,11 +24,11 @@ public class NestedCategory {
         this.popularCategory = popularCategory;
     }
 
-    public List<Product> getCategories() {
+    public List<SubCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Product> categories) {
+    public void setCategories(List<SubCategory> categories) {
         this.categories = categories;
     }
 }

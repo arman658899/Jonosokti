@@ -8,4 +8,5 @@
     <color name="editText_bg">#C4FBF7F7</color>
     <color name="color_gold">#FFD700</color>
     <color name="color_green">#0DC916</color>
+    <color name="colorBlack50">#80000000</color>
 </resources>

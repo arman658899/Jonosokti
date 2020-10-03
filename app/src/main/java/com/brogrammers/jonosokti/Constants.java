@@ -15,6 +15,30 @@ public class Constants {
     public static final String DB_SUB_CATEGORIES = "SUB_CATEGORIES";
     public static final String STORAGE_SUB_CATEGORIES = "SUB_CATEGORY_PICTURES";
 
+    public static final String DB_PROVIDERS = "PROVIDERS";
+    public static final String STORAGE_PROVIDERS = "PROVIDERS_IMAGES";
+
+    public static final String DB_SERVICES_PROVIDERS = "SERVICES_WITH_PROVIDERS";
+
+    //all locations
+    public static final String[] PROVIDER_LOCATIONS = {
+            "Akbar Shah",
+            "Bakalia",
+            "Bandar",
+            "Bayazid Bostami",
+            "Chandgaon",
+            "Chawkbazar",
+            "Chittagong Kotwali",
+            "Double Mooring",
+            "EPZ",
+            "Halishahar",
+            "Khulshi",
+            "Pahartali",
+            "Panchlaish",
+            "Patenga",
+            "Sadarghat"
+    };
+
 
     //log TAG
     public static final String TAG = "LOGS_DATA";

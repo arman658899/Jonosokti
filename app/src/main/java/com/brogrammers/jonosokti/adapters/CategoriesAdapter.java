@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.bean.Category;
-import com.brogrammers.jonosokti.listeners.OnCategorySelectListener;
+import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.viewholders.CategoryViewHolder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> {
     private Context context;
-    private OnCategorySelectListener listener;
+    private OnItemSelectListener<Category> listener;
 
     @Override
     public void submitList(@Nullable List<Category> list) {
@@ -29,7 +29,7 @@ public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> 
         if (list.size()>0) notifyDataSetChanged();
     }
 
-    public CategoriesAdapter(Context context, OnCategorySelectListener listener) {
+    public CategoriesAdapter(Context context, OnItemSelectListener<Category> listener) {
         super(DIFF_UTIL);
         this.context = context;
         this.listener = listener;
@@ -58,7 +58,7 @@ public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //listener.onCategorySelected(getItem(position).getCategoryName(),position);
+                if (listener!=null) listener.onItemSelected(getItem(position));
             }
         });
 
@@ -67,6 +67,7 @@ public class CategoriesAdapter extends ListAdapter<Category,CategoryViewHolder> 
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
     }
+
 
 
 

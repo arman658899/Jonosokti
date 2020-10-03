@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
 
 import com.brogrammers.jonosokti.R;
-import com.brogrammers.jonosokti.adapters.SubCategoryAdapter;
+import com.brogrammers.jonosokti.adapters.SubCategoryVerticalAdapter;
+import com.brogrammers.jonosokti.bean.SubCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceCategoryFragment extends Fragment {
     private RecyclerView recyclerView;
-    private SubCategoryAdapter adapter;
-    private List<String> categories;
+    private SubCategoryVerticalAdapter adapter;
+    private List<SubCategory> categories;
 
     private String categoryName;
     private int positon;
@@ -38,11 +37,7 @@ public class ServiceCategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         categories = new ArrayList<>();
-        adapter = new SubCategoryAdapter(requireActivity());
-
-        for (int i=0; i<positon; i++){
-            categories.add("Sub-Category "+(i+1));
-        }
+        adapter = new SubCategoryVerticalAdapter(requireActivity(),null);
         adapter.submitList(categories);
 
     }
