@@ -8,7 +8,7 @@
     android:background="@android:color/background_light"
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/circleImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-    </de.hdodenhof.circleimageview.CircleImageView>
+    </com.mikhaellopez.circularimageview.CircularImageView>
 
     <TextView
         android:id="@+id/nameTv"

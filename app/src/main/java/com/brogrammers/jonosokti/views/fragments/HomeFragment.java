@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,7 @@ import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
 import com.brogrammers.jonosokti.bean.Product;
 import com.brogrammers.jonosokti.listeners.OnCategorySelectListener;
+import com.brogrammers.jonosokti.viewmodels.HomeFragmentViewModel;
 import com.brogrammers.jonosokti.views.AllServicesActivity;
 import com.bumptech.glide.Glide;
 
@@ -44,10 +47,14 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
     private CategoriesAdapter categoriesAdapter;
     private NestedCategoryAdapter popularAdapter;
 
+    //viewmodel
+    private HomeFragmentViewModel viewModel;
+
     public HomeFragment() {
         // Required empty public constructor
-
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,22 +62,18 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
         categories = new ArrayList<>();
         nestedCategories = new ArrayList<>();
         products = new ArrayList<>();
-        categoriesAdapter = new CategoriesAdapter(requireActivity(),this);
+        categoriesAdapter = new CategoriesAdapter(requireActivity(), this);
         popularAdapter = new NestedCategoryAdapter(requireActivity());
-
-
-        for (int i = 0; i < CATEGORIES.length; i++) {
-            categories.add(new Category(CATEGORIES[i]));
-            if (i<10) products.add(new Product("Sub-Category"));
-        }
         categoriesAdapter.submitList(categories);
 
 
-
-        for (int i=0; i<5; i++){
-            nestedCategories.add(new NestedCategory("Popular Categories",products));
+        for (int i = 0; i < 5; i++) {
+            nestedCategories.add(new NestedCategory("Popular Categories", products));
         }
         popularAdapter.submitList(nestedCategories);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
+
 
     }
 
@@ -96,7 +99,21 @@ public class HomeFragment extends Fragment implements OnCategorySelectListener {
         recyclerViewPopularCategories.setHasFixedSize(true);
         recyclerViewPopularCategories.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewPopularCategories.setAdapter(popularAdapter);
+
+
+        viewModel.getCategoriesLiveData().removeObserver(categoryObserver);
+        viewModel.getCategoriesLiveData().observe(requireActivity(), categoryObserver);
+
     }
+
+    private Observer<List<Category>> categoryObserver = new Observer<List<Category>>() {
+        @Override
+        public void onChanged(List<Category> categoriesLive) {
+            categories.clear();
+            categories.addAll(categoriesLive);
+            categoriesAdapter.submitList(categories);
+        }
+    };
 
     private void intiViewFlipper() {
         ImageView imageView = new ImageView(getActivity());

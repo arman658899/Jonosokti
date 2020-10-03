@@ -8,4 +8,16 @@ public class Constants {
             "Carpenter and Furniture Service","Gas Stoves & Burners","Home & Living","Cleaning Service","Parlour Service",
             "Fitness and sport","Event and media Service","Motor Driving learning","Pest Control","Corporate Care Services",
             "Foods","Agricultural","Special Sweets"};
+
+    public static final String DB_CATEGORIES = "CATEGORIES";
+    public static final String STORAGE_CATEGORIES = "CATEGORY_PICTURES";
+
+    public static final String DB_SUB_CATEGORIES = "SUB_CATEGORIES";
+    public static final String STORAGE_SUB_CATEGORIES = "SUB_CATEGORY_PICTURES";
+
+
+    //log TAG
+    public static final String TAG = "LOGS_DATA";
+    public static final String DATA_PERSISTENCE_EXCEPTION = "Data persistence exception.";
+
 }

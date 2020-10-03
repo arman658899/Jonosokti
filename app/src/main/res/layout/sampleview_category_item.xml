@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:id="@+id/cardview_product_container"
+<androidx.cardview.widget.CardView android:id="@+id/cardview_product_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
@@ -10,7 +9,8 @@
     android:elevation="6dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:padding="8dp"
@@ -22,7 +22,7 @@
             android:id="@+id/imageView_service"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/shifting"
+            tools:src="@drawable/shifting"
             />
 
         <TextView
