@@ -1,67 +1,56 @@
 package com.brogrammers.jonosokti.views;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.views.fragments.CartFragment;
 import com.brogrammers.jonosokti.views.fragments.HomeFragment;
 import com.brogrammers.jonosokti.views.fragments.ProfileFragment;
 import com.brogrammers.jonosokti.views.fragments.OrderFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    ChipNavigationBar chipNavigationBar;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        chipNavigationBar = findViewById( R.id.bottom_nav_menu );
-        chipNavigationBar.setItemSelected( R.id.bottom_home,true );
+        bottomNavigationView=findViewById(R.id.bottomNavigationView);
 
-        if(savedInstanceState==null) replaceFragment(new HomeFragment());
-
-        bottomMenu();
-    }
-
-    private void bottomMenu() {
-        chipNavigationBar.setOnItemSelectedListener( new ChipNavigationBar.OnItemSelectedListener() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onItemSelected(int id) {
-                switch (id){
-                    case R.id.bottom_order:
-                        replaceFragment(new OrderFragment());
-                        break;
-                    case R.id.bottom_cart:{
-                        replaceFragment(new CartFragment());
-                        break;
-                    }
-                    case R.id.bottom_profile:{
-                        replaceFragment(new ProfileFragment());
-                        break;
-                    }
-                    default: replaceFragment(new HomeFragment());
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment=null;
+                if (item.getItemId()==R.id.home)
+                {
+                    fragment=new HomeFragment();
+                    item.setChecked(true);
                 }
+                if (item.getItemId()==R.id.bottom_order)
+                {
+                    fragment=new OrderFragment();
+                    item.setChecked(true);
+                }
+                if (item.getItemId()==R.id.bottom_profile)
+                {
+                    fragment=new ProfileFragment();
+                    item.setChecked(true);
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                return true;
             }
-        } );
-    }
+        });
 
-    private void replaceFragment(Fragment fragment){
-        String fragmentName = fragment.getClass().getName();
-
-        boolean popped = getSupportFragmentManager().popBackStackImmediate(fragmentName,0);
-        if (!popped && getSupportFragmentManager().findFragmentByTag(fragmentName)==null){
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.replace(R.id.fragment_container,fragment,fragmentName);
-            ft.addToBackStack(fragmentName);
-            ft.commit();
-        }
     }
 }

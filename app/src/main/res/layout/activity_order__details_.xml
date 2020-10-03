@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Order_Details_Activity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/background_light"
+        android:elevation="5dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:background="@android:color/background_light" android:layout_marginStart="5dp" android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/service_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Servicing Name Here"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbarThumbVertical="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:background="@android:color/background_light"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    app:layout_constraintStart_toStartOf="@+id/textview_provider_name"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_provider_name">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="3dp"
+                        android:src="@drawable/icon_star" />
+
+                    <TextView
+                        android:id="@+id/textview_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="4.3"
+                        android:layout_marginStart="2dp"
+                        android:textSize="12sp"
+                        app:layout_constraintTop_toBottomOf="@+id/textview_symptoms" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="Order Id:"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_order_id"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_order_id"
+                    app:layout_constraintTop_toTopOf="@+id/textview_order_id" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/servicepro"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textview_provider_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Name here"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/circularImageView_provider"
+                    app:layout_constraintStart_toEndOf="@+id/circularImageView_provider"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    app:layout_constraintVertical_bias="0.3" />
+
+                <TextView
+                    android:id="@+id/textview_order_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="1111111"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+                <TextView
+                    android:id="@+id/provider_profile_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Profile"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/circularImageView_provider"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/pp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/view2"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_order_id"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView15"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_order_id" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+                <TextView
+                    android:id="@+id/textview_order_placed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/order_placed"
+                    android:textColor="@color/color_gold"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_order_accepted"
+                    app:layout_constraintStart_toStartOf="@+id/view3"
+                    app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+                <TextView
+                    android:id="@+id/textview_order_accepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_accepted"
+                    android:textColor="@color/color_green"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_order_placed"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_work_started"
+                    app:layout_constraintStart_toEndOf="@+id/textview_order_placed"
+                    app:layout_constraintTop_toTopOf="@+id/textview_order_placed" />
+
+
+                <TextView
+                    android:id="@+id/textview_work_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/started"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_order_accepted"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_completed"
+                    app:layout_constraintStart_toEndOf="@+id/textview_order_accepted"
+                    app:layout_constraintTop_toTopOf="@+id/textview_order_accepted" />
+
+                <TextView
+                    android:id="@+id/textview_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Completed"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textview_work_started"
+                    app:layout_constraintEnd_toEndOf="@+id/view3"
+                    app:layout_constraintStart_toEndOf="@+id/textview_work_started"
+                    app:layout_constraintTop_toTopOf="@+id/textview_work_started" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/order_progress"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textview_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="12sp"
+                    android:text="@string/order_cancel"
+                    android:textColor="@android:color/holo_red_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView1" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_cancel"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView1"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_cancel" />
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toStartOf="@+id/checkbox_completed"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/checkbox_placed"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_order_accepted" />
+
+                <View
+                    android:id="@+id/view9"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/black"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_cancel"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView1"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_time_placed" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_placed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_light"
+                    android:clickable="false"
+                    android:button="@drawable/selector_checkbox_placed"
+                    android:checked="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/view10"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_order_placed"
+                    app:layout_constraintStart_toStartOf="@+id/textview_order_placed"
+                    app:layout_constraintTop_toTopOf="@+id/view10" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_accepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_light"
+                    android:button="@drawable/selector_checkbox_accepted"
+                    android:checked="true"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/view10"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_order_accepted"
+                    app:layout_constraintStart_toStartOf="@+id/textview_order_accepted"
+                    app:layout_constraintTop_toTopOf="@+id/view10" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_light"
+                    android:button="@drawable/selector_checkbox_started"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/view10"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_work_started"
+                    app:layout_constraintStart_toStartOf="@+id/textview_work_started"
+                    app:layout_constraintTop_toTopOf="@+id/view10" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/background_light"
+                    android:button="@drawable/selector_checkbox_complete"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/view10"
+                    app:layout_constraintEnd_toEndOf="@+id/textview_completed"
+                    app:layout_constraintStart_toStartOf="@+id/textview_completed"
+                    app:layout_constraintTop_toTopOf="@+id/view10" />
+
+                <TextView
+                    android:id="@+id/textview_time_placed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time Here"
+                    app:layout_constraintEnd_toEndOf="@+id/checkbox_placed"
+                    app:layout_constraintStart_toStartOf="@+id/checkbox_placed"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_placed" />
+
+                <TextView
+                    android:id="@+id/textview_time_accepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time Here"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/checkbox_accepted"
+                    app:layout_constraintStart_toStartOf="@+id/checkbox_accepted"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_accepted" />
+
+                <TextView
+                    android:id="@+id/textview_time_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time Here"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/checkbox_started"
+                    app:layout_constraintStart_toStartOf="@+id/checkbox_started"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_started" />
+
+                <TextView
+                    android:id="@+id/textview_time_complete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time Here"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/checkbox_completed"
+                    app:layout_constraintStart_toStartOf="@+id/checkbox_completed"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_completed" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12sp"
+                    android:text="Order Activity"
+                    android:textColor="@android:color/holo_blue_dark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/view9"
+                    app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout9"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="?listPreferredItemHeight"
+                android:background="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+                <TextView
+                    android:id="@+id/order_faq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/orderFaq"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="?listPreferredItemHeight"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="90dp"
+                android:background="@android:color/background_light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageButton
+                    android:id="@+id/call_Iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/background_light"
+                    android:src="@drawable/ic_baseline_phone_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/need_help"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/need_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="Call us..."
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/call_Iv"
+                    app:layout_constraintEnd_toStartOf="@+id/call_Iv"
+                    app:layout_constraintTop_toTopOf="@+id/call_Iv" />
+
+                <TextView
+                    android:id="@+id/need_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/help"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

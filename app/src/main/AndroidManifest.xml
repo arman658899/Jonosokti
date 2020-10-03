@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.AllServicesActivity"/>
+        <activity android:name=".Order_Details_Activity"></activity>
+        <activity android:name=".views.AllServicesActivity" />
         <activity android:name=".views.OnBoarding" />
         <activity android:name=".views.MainActivity" />
         <activity android:name=".views.SplashScreen">

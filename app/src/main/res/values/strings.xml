@@ -5,6 +5,8 @@
     <string name="search_dialog">What are you looking for?</string>
     <string name="content_description">Image</string>
 
+    <string name="servicepro">Service Provider</string>
+
     <!--
     On Boarding
 -->
@@ -63,5 +65,13 @@
     <string name="order">Order</string>
     <string name="profile">Profile</string>
     <string name="my_order">My Order</string>
-
+    <!--ongoing property-->
+    <string name="order_progress">Order Progress</string>
+    <string name="order_cancel">Cancel Request</string>
+    <string name="order_placed">Order Placed</string>
+    <string name="order_accepted">Order Accepted</string>
+    <string name="started">Work Started</string>
+    <string name="Completed">Completed</string>
+    <string name="orderFaq">Order FAQ</string>
+    <string name="help">Need Our Help?</string>
 </resources>
