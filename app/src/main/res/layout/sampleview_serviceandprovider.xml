@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@android:color/background_light">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/circularImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_user"
+            app:civ_border_color="@color/color_gold"
+            app:civ_border_width="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_provider_name"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="Sirajul Islam Sajib"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/circularImageView"
+            app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
+
+        <TextView
+            android:id="@+id/textView_company_name_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_vertical_line"
+            android:gravity="center"
+            android:text="Company Name:"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/textView_company_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Company Name:"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_company_name_hint"
+            app:layout_constraintEnd_toEndOf="@+id/textView_provider_name"
+            app:layout_constraintEnd_toStartOf="@+id/textView_provider_name"
+            app:layout_constraintStart_toEndOf="@+id/textView_company_name_hint"
+            app:layout_constraintTop_toTopOf="@+id/textView_company_name_hint" />
+
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Price here"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_price_hint"
+            app:layout_constraintEnd_toStartOf="@+id/textView_provider_name"
+            app:layout_constraintStart_toStartOf="@+id/textView_service_name"
+            app:layout_constraintTop_toTopOf="@+id/textView_price_hint" />
+
+        <TextView
+            android:id="@+id/textView_price_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_vertical_line"
+            android:text="Service Price:"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_service_name" />
+
+        <TextView
+            android:id="@+id/textView_service_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Service name here"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_service_name_hint"
+            app:layout_constraintEnd_toStartOf="@+id/textView_provider_name"
+            app:layout_constraintStart_toEndOf="@+id/textView_service_name_hint"
+            app:layout_constraintStart_toStartOf="@+id/textView_company_name"
+            app:layout_constraintTop_toTopOf="@+id/textView_service_name_hint" />
+
+        <TextView
+            android:id="@+id/textView_service_name_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:drawableStart="@drawable/ic_vertical_line"
+            android:text="Service name:"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_company_name" />
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Add"
+            android:textColor="@android:color/background_light"
+            android:textAllCaps="false"
+            android:background="@drawable/ripple_btn_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
