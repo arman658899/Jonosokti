@@ -10,4 +10,11 @@
     <color name="color_green">#0DC916</color>
     <color name="colorBlack50">#80000000</color>
     <color name="color_yellow_light">#FFFAE6</color>
+
+    <color name="color_light">#F6ECDD</color>
+    <color name="color_gray">#FBF3F3</color>
+
+    <color name="colorTextColor1">#009688</color>
+    <color name="colorTextColor2">#E91E63</color>
+
 </resources>

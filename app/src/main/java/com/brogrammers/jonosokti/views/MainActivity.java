@@ -15,7 +15,6 @@ import com.brogrammers.jonosokti.views.fragments.HomeFragment;
 import com.brogrammers.jonosokti.views.fragments.ProfileFragment;
 import com.brogrammers.jonosokti.views.fragments.OrderFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.brogrammers.jonosokti.R;
@@ -23,8 +24,10 @@ import com.brogrammers.jonosokti.adapters.CategoriesAdapter;
 import com.brogrammers.jonosokti.adapters.NestedCategoryAdapter;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
+import com.brogrammers.jonosokti.helpers.AppPreferences;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.viewmodels.HomeFragmentViewModel;
+import com.brogrammers.jonosokti.views.SelectLocationActivitiy;
 import com.brogrammers.jonosokti.views.SingleServiceSubCategoriesActivity;
 import com.bumptech.glide.Glide;
 
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements OnItemSelectListener<Category> {
-
+    private TextView tvLocation;
     private ViewFlipper viewFlipper;
     private RecyclerView recyclerViewCategories, recyclerViewPopularCategories;
     private List<Category> categories;
@@ -73,6 +76,14 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvLocation = view.findViewById(R.id.textview_location);
+        tvLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), SelectLocationActivitiy.class);
+                startActivity(intent);
+            }
+        });
         viewFlipper = view.findViewById(R.id.viewFlipper);
         intiViewFlipper();
         recyclerViewCategories = view.findViewById(R.id.recyclerview_CategoryView_home);
@@ -130,6 +141,10 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
         super.onResume();
 
         viewFlipper.startFlipping();
+
+        if (AppPreferences.getUserLocationName(requireActivity()).isEmpty()){
+            tvLocation.setText("Please select your location.");
+        }else tvLocation.setText(AppPreferences.getUserLocationName(requireActivity()));
 
     }
 

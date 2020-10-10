@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
     private CollapsingToolbarLayout collapsingToolbar;
 
     private ImageView imageView;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar,progressBarMain;
 
     private Category mCategory;
     @Override
@@ -83,6 +84,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
 
         imageView = findViewById(R.id.imageview_category_icon);
         progressBar = findViewById(R.id.progress_bar);
+        progressBarMain = findViewById(R.id.progress_bar_main);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -94,7 +96,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
         toolbar = findViewById(R.id.toolbar);
 
         if (mCategory!=null) collapsingToolbar.setTitle(mCategory.getCategoryName());
-        toolbar.setNavigationIcon(R.drawable.icon_back);
+        toolbar.setNavigationIcon(R.drawable.icon_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +112,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
             subCategories.clear();
             subCategories.addAll(updatedData);
             adapter.notifyDataSetChanged();
+            progressBarMain.setVisibility(View.GONE);
         }
     };
 
@@ -123,6 +126,8 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
 
     @Override
     public void onItemSelected(SubCategory subCategory) {
-
+        Intent intent = new Intent(this,SelectServiceAndProviderActivity.class);
+        intent.putExtra("sub_cat",subCategory);
+        startActivity(intent);
     }
 }

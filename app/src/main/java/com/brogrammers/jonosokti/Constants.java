@@ -39,6 +39,10 @@ public class Constants {
             "Sadarghat"
     };
 
+    public static final String[] MONTH_NAME_SHORT = {"JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
+    public static final String[] DAY_NAME = {"SUN","MON","TUE","WED","THU","FRI","SAT"};
+    public static final String[] WORKING_TIMES = {"9:00 am-10:00 am","10:00 am-11:00 am","11:00 am-12:00 pm","12:00 pm-1:00 pm","2:00 pm-3:00 pm","3:00 pm-4:00 pm","4:00 pm-5:00 pm"};
+
 
     //log TAG
     public static final String TAG = "LOGS_DATA";

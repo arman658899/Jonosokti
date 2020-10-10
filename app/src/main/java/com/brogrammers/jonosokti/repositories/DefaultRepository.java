@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.brogrammers.jonosokti.Constants;
 import com.brogrammers.jonosokti.bean.Category;
+import com.brogrammers.jonosokti.bean.ServiceAndProvider;
 import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.helpers.ApplicationHelper;
 import com.brogrammers.jonosokti.listeners.OnDataDownloadListener;
@@ -126,6 +127,30 @@ public class DefaultRepository {
                         for (DocumentSnapshot ds: queryDocumentSnapshots){
                             try{
                                 SubCategory category = ds.toObject(SubCategory.class);
+                                listener.onDownloaded(category);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                        listener.onFinish();
+                    }
+                });
+    }
+
+    public void getAllServiceProvidersBySubCatAndLocation(String subCategoryId, String location,final OnDataDownloadListener<ServiceAndProvider> listener){
+        List<String> locations = new ArrayList<>();
+        locations.add(location);
+        COLL_SERVICES_PROVIDERS
+                .whereEqualTo("subCatId",subCategoryId)
+                .whereArrayContainsAny("locations",locations)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        listener.onStarted();
+                        for (DocumentSnapshot ds: queryDocumentSnapshots){
+                            try{
+                                ServiceAndProvider category = ds.toObject(ServiceAndProvider.class);
                                 listener.onDownloaded(category);
                             }catch (Exception e){
                                 e.printStackTrace();
