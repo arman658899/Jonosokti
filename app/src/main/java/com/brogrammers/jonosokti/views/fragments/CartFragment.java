@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brogrammers.jonosokti.R;
-import com.brogrammers.jonosokti.ScheduleActivity;
+import com.brogrammers.jonosokti.views.ScheduleActivity;
 import com.brogrammers.jonosokti.adapters.CartAdapter;
 import com.brogrammers.jonosokti.bean.model.Cart;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;

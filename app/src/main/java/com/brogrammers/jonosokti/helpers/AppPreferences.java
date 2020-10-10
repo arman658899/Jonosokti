@@ -5,18 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class AppPreferences {
-    /*private Context context;
-    private static AppPreferences instance;
-
-    private AppPreferences(Context context){
-        this.context = context;
-    }
-
-    public static AppPreferences getInstance(Application application){
-        if (instance==null) instance = new AppPreferences(application);
-        return instance;
-    }*/
-
     public static final String PREFERENCE_DATABASE = "jonosokti_client";
     public static final String FIELD_LOCATION = "client_location";
 
@@ -32,6 +20,32 @@ public class AppPreferences {
         return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getString(FIELD_LOCATION,"");
     }
 
+    public static class Login{
+        static String IS_FIRST_TIME_LOGIN = "is_first_time_login";
+        static String IS_LOGIN = "is_login";
+        public static void setIsFirstTimeLogin(Context context, boolean isFirst){
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(IS_FIRST_TIME_LOGIN,isFirst);
+            editor.apply();
+        }
+
+        public static boolean isFirstTimeLogin(Context context){
+            return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getBoolean(IS_FIRST_TIME_LOGIN,false);
+        }
+
+        public static void setIsLogin(Context context, boolean isLogin){
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(IS_LOGIN,isLogin);
+            editor.apply();
+        }
+
+        public static boolean isLogin(Context context){
+            return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getBoolean(IS_LOGIN,false);
+        }
+
+    }
 
     public static class UserInfo{
         public static final String USER_NAME = "user_name";

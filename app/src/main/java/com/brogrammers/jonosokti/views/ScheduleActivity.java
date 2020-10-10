@@ -1,4 +1,4 @@
-package com.brogrammers.jonosokti;
+package com.brogrammers.jonosokti.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -7,26 +7,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.brogrammers.jonosokti.Constants;
+import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.AdapterSchedulDate;
 import com.brogrammers.jonosokti.adapters.AdapterSchedulTime;
+import com.brogrammers.jonosokti.bean.Date;
+import com.brogrammers.jonosokti.bean.Time;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
-import com.brogrammers.jonosokti.views.FilupAddressActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-public class ScheduleActivity extends AppCompatActivity implements OnItemSelectListener<String>, OnItemSelectListener2<Long> {
+public class ScheduleActivity extends AppCompatActivity {
     RecyclerView recyclerViewTime,recyclerViewDate;
     AdapterSchedulTime adapterSchedulTime;
     AdapterSchedulDate adapterSchedulDate;
-    private List<Long> dates;
-    private List<String> times = Arrays.asList(Constants.WORKING_TIMES);
+    private List<Date> dates;
+    private List<Time> times;
     private long currentTime,aDay=86400000;
 
     private String selectedTime = "";
@@ -38,12 +42,39 @@ public class ScheduleActivity extends AppCompatActivity implements OnItemSelectL
 
         currentTime = Calendar.getInstance().getTimeInMillis();
         dates = new ArrayList<>();
+        times = new ArrayList<>();
         for (int i=0; i<7; i++){
-            dates.add(currentTime+(aDay*i));
+            dates.add(new Date(false,currentTime+(aDay*i)));
         }
 
-        adapterSchedulTime = new AdapterSchedulTime(this,times,this);
-        adapterSchedulDate =new AdapterSchedulDate(this,dates);
+        for (int i=0; i<Constants.WORKING_TIMES.length; i++){
+            times.add(new Time(false,Constants.WORKING_TIMES[i]));
+        }
+
+        adapterSchedulTime = new AdapterSchedulTime(this, times, new OnItemSelectListener2<Time>() {
+            @Override
+            public void onItemSelected2(Time time, int index) {
+                selectedTime = time.getTime();
+                Log.d(Constants.TAG, "onItemSelected2: "+selectedDate+"-"+selectedTime);
+                time.setClicked(true);
+                for (int i=0; i<times.size(); i++){
+                    if (i==index) times.get(i).setClicked(true);
+                    else times.get(i).setClicked(false);
+                }
+                adapterSchedulTime.notifyDataSetChanged();
+            }
+        });
+        adapterSchedulDate =new AdapterSchedulDate(this, dates, new OnItemSelectListener2<Date>() {
+            @Override
+            public void onItemSelected2(Date aLong, int index) {
+                selectedDate = aLong.getTimeInMilliseconds();
+                for (int i=0; i<dates.size(); i++){
+                    if (i==index) dates.get(i).setClicked(true);
+                    else dates.get(i).setClicked(false);
+                }
+                adapterSchedulDate.notifyDataSetChanged();
+            }
+        });
         recyclerViewDate = findViewById(R.id.recyclerview_date);
         recyclerViewDate.setHasFixedSize(true);
         recyclerViewDate.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
@@ -67,15 +98,5 @@ public class ScheduleActivity extends AppCompatActivity implements OnItemSelectL
             }
         });
 
-    }
-
-    @Override
-    public void onItemSelected(String s) {
-        selectedTime = s;
-    }
-
-    @Override
-    public void onItemSelected2(Long aLong) {
-        selectedDate = aLong;
     }
 }

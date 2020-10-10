@@ -1,6 +1,7 @@
 package com.brogrammers.jonosokti.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,18 +9,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brogrammers.jonosokti.R;
+import com.brogrammers.jonosokti.bean.Time;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
+import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import static com.brogrammers.jonosokti.Constants.TAG;
+
 public class AdapterSchedulTime extends RecyclerView.Adapter<AdapterSchedulTime.ViewholderTime> {
     private Context context;
-    private List<String> times;
-    private OnItemSelectListener<String> listener;
-    public AdapterSchedulTime(Context context, List<String> times,OnItemSelectListener<String> listener) {
+    private List<Time> times;
+    private OnItemSelectListener2<Time> listener;
+    public AdapterSchedulTime(Context context, List<Time> times,OnItemSelectListener2<Time> listener) {
         this.context = context;
         this.times = times;
         this.listener = listener;
@@ -34,11 +39,18 @@ public class AdapterSchedulTime extends RecyclerView.Adapter<AdapterSchedulTime.
 
     @Override
     public void onBindViewHolder(@NonNull ViewholderTime holder, int position) {
-        holder.tvTime.setText(times.get(position));
+        holder.tvTime.setText(times.get(position).getTime());
+
+        if (!times.get(position).isClicked()) holder.container.setBackground(context.getResources().getDrawable(R.drawable.shape_background_schedule_white));
+        else holder.container.setBackground(context.getResources().getDrawable(R.drawable.shape_background_schedule));
+
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener!=null) listener.onItemSelected(times.get(position));
+                if (listener!=null) {
+                    listener.onItemSelected2(times.get(position),position);
+                    Log.d(TAG, "onClick: "+times.get(position));
+                }Log.d(TAG, "onClick: "+times.get(position));
             }
         });
     }
@@ -56,6 +68,7 @@ public class AdapterSchedulTime extends RecyclerView.Adapter<AdapterSchedulTime.
 
             tvTime = itemView.findViewById(R.id.textView_time);
             container = itemView.findViewById(R.id.linearLayout_container);
+            container.setFocusable(true);
         }
     }
 }

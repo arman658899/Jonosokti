@@ -27,7 +27,7 @@ import com.brogrammers.jonosokti.R;
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splash_screen );
 
-        topAnimation= AnimationUtils.loadAnimation(this,R.anim.top_animation);
+       /* topAnimation= AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnimation= AnimationUtils.loadAnimation(this,R.anim.botom_animation);
         //hooks
         image=findViewById( R.id.imageView );
@@ -59,6 +59,6 @@ import com.brogrammers.jonosokti.R;
                }
 
            }
-       },splashScreen );
+       },splashScreen );*/
     }
 }

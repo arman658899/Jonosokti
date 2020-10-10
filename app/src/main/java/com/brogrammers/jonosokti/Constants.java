@@ -19,6 +19,7 @@ public class Constants {
     public static final String STORAGE_PROVIDERS = "PROVIDERS_IMAGES";
 
     public static final String DB_SERVICES_PROVIDERS = "SERVICES_WITH_PROVIDERS";
+    public static final String DB_USERS = "USERS";
 
     //all locations
     public static final String[] PROVIDER_LOCATIONS = {

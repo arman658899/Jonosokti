@@ -16,7 +16,6 @@
         android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:hint="Otp verification code has been sent to your number"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"

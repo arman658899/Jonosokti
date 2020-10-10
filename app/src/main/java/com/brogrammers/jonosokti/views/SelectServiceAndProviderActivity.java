@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brogrammers.jonosokti.R;
-import com.brogrammers.jonosokti.ScheduleActivity;
 import com.brogrammers.jonosokti.adapters.ServiceAndProviderAdapter;
 import com.brogrammers.jonosokti.bean.ServiceAndProvider;
 import com.brogrammers.jonosokti.bean.SubCategory;

@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.brogrammers.jonosokti.R;
+import com.brogrammers.jonosokti.helpers.AppPreferences;
+import com.brogrammers.jonosokti.helpers.ApplicationHelper;
 import com.brogrammers.jonosokti.views.fragments.CartFragment;
 import com.brogrammers.jonosokti.views.fragments.HomeFragment;
 import com.brogrammers.jonosokti.views.fragments.ProfileFragment;
@@ -50,6 +53,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (savedInstanceState==null) replaceFragment(new HomeFragment());
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!AppPreferences.Login.isFirstTimeLogin(this)){
+            Intent intent = new Intent(this, IntroSliderActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_in);
+        }
+        else if (ApplicationHelper.getDatabase().getAuth().getCurrentUser()==null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_in);
+
+        }else if (ApplicationHelper.getDatabase().getAuth().getCurrentUser()!=null){
+            if (AppPreferences.UserInfo.getUserName(this).isEmpty()){
+                Intent intent = new Intent(this, RegistrationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_in);
+            }
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
 
     }
 

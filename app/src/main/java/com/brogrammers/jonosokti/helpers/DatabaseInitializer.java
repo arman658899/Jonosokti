@@ -3,6 +3,7 @@ package com.brogrammers.jonosokti.helpers;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
@@ -12,7 +13,7 @@ public class DatabaseInitializer {
     public static DatabaseInitializer instance;
     public  FirebaseFirestore db;
     public  StorageReference storage;
-
+    public FirebaseAuth mAuth;
     private Context context;
     public DatabaseInitializer(Application application){
         this.context = application;
@@ -24,6 +25,7 @@ public class DatabaseInitializer {
     }
 
     public void init(){
+        mAuth = FirebaseAuth.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
@@ -39,5 +41,8 @@ public class DatabaseInitializer {
     }
     public StorageReference getStorage(){
         return storage;
+    }
+    public FirebaseAuth getAuth(){
+        return mAuth;
     }
 }
