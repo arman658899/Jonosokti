@@ -76,7 +76,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
                     })
                     .into(imageView);
             viewModel.getAllSubCategoriesByCategoryId(mCategory.getCategoryId());
-
+            viewModel.incrementViewsOnCategory(mCategory.getCategoryId());
         }
     }
 
@@ -122,6 +122,8 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
 
         viewModel.getSubCategoriesLiveData().removeObserver(subCategoryObserver);
         viewModel.getSubCategoriesLiveData().observe(this,subCategoryObserver);
+
+
     }
 
     @Override

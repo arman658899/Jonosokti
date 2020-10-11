@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.brogrammers.jonosokti.adapters.AdapterSchedulDate;
 import com.brogrammers.jonosokti.adapters.AdapterSchedulTime;
 import com.brogrammers.jonosokti.bean.Date;
 import com.brogrammers.jonosokti.bean.Time;
+import com.brogrammers.jonosokti.helpers.AppPreferences;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
 
@@ -90,13 +92,21 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedDate!=-1 && !selectedTime.isEmpty()){
+                    AppPreferences.setLastOrderTimeAndDate(ScheduleActivity.this,selectedTime,getFormatedDate(selectedDate));
                     Intent intent = new Intent(ScheduleActivity.this, FilupAddressActivity.class);
-                    intent.putExtra("date",selectedDate);
-                    intent.putExtra("time",selectedTime);
                     startActivity(intent);
+                    finish();
+
                 }else Toast.makeText(ScheduleActivity.this, "Please select date & time.", Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private String getFormatedDate(long selectedDate) {
+        if (selectedDate <= 0) return "";
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(selectedDate);
+        return DateFormat.format("dd-MM-yyyy",calendar).toString();
     }
 }

@@ -5,20 +5,28 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.brogrammers.jonosokti.Constants;
 import com.brogrammers.jonosokti.bean.Category;
+import com.brogrammers.jonosokti.bean.Order;
 import com.brogrammers.jonosokti.bean.ServiceAndProvider;
 import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.helpers.ApplicationHelper;
 import com.brogrammers.jonosokti.listeners.OnDataDownloadListener;
+import com.brogrammers.jonosokti.listeners.OnUploadListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +35,40 @@ public class DefaultRepository {
     private static DefaultRepository repository;
     FirebaseFirestore db;
     private Context context;
-    private CollectionReference COLL_CATEGORIES,COLL_SUB_CATEGORIES,COLL_SERVICES_PROVIDERS;
+    private CollectionReference COLL_CATEGORIES,COLL_SUB_CATEGORIES,COLL_SERVICES_PROVIDERS,COLL_ORDERS;
     public DefaultRepository(Context context){
         this.context = context;
         db = ApplicationHelper.getDatabase().getDb();
         COLL_CATEGORIES = db.collection(Constants.DB_CATEGORIES);
         COLL_SERVICES_PROVIDERS = db.collection(Constants.DB_SERVICES_PROVIDERS);
         COLL_SUB_CATEGORIES = db.collection(Constants.DB_SUB_CATEGORIES);
+        COLL_ORDERS = db.collection(Constants.DB_ORDERS);
     }
     public static DefaultRepository getInstance(Context context){
         if (repository==null) repository = new DefaultRepository(context);
         return repository;
+    }
+
+    public void incrementCategoryViews(final String categoryId){
+        db.runTransaction(new Transaction.Function<Void>() {
+
+            @Nullable
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+
+                DocumentSnapshot ds = transaction.get(COLL_CATEGORIES.document(categoryId));
+                if (ds.exists()){
+                    try{
+                        long views = ds.getLong("viewed");
+                        transaction.update(COLL_CATEGORIES.document(categoryId),"viewed",views+1);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                return null;
+            }
+        });
     }
 
     public void getCategories(final OnDataDownloadListener<Category> listener){
@@ -161,4 +192,20 @@ public class DefaultRepository {
                 });
     }
 
+    //orders
+    public String getOrderDocumentId(){
+        return COLL_ORDERS.document().getId();
+    }
+
+    public void createNewOrder(final Order order, final OnUploadListener listener){
+        COLL_ORDERS.document(order.getDocumentId())
+                .set(order, SetOptions.merge())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) listener.onUploaded();
+                        else listener.onFailed();
+                    }
+                });
+    }
 }

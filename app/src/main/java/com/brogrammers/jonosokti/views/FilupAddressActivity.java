@@ -76,7 +76,7 @@ public class FilupAddressActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(FilupAddressActivity.this,ConfirmOrderActivity.class);
                 startActivity(intent);
-
+                finish();
 
             }
         });

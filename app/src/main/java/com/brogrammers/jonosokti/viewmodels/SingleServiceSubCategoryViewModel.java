@@ -51,7 +51,14 @@ public class SingleServiceSubCategoryViewModel extends AndroidViewModel {
         });
     }
 
+    public void incrementViewsOnCategory(String categoryId) {
+        defaultRepository.incrementCategoryViews(categoryId);
+    }
+
+
     public LiveData<List<SubCategory>> getSubCategoriesLiveData(){
         return mlSubCategories;
     }
+
+
 }

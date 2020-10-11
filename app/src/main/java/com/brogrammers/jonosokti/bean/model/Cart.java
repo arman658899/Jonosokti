@@ -15,19 +15,21 @@ public class Cart {
     private @NotNull String  subCatId;
     private String subCatName;
     private String categoryName,categoryId;
-    private String providerName;
+    private String providerName,providerCompany,providerPic;
     @ColumnInfo(name = "providerUid")
     private String providerUid;
     private String productSize;
     private int quantity;
     private double serviceFee;
 
-    public Cart(@NotNull String subCatId, String subCatName, String categoryName, String categoryId, String providerName, String providerUid, String productSize, int quantity, double serviceFee) {
+    public Cart(@NotNull String subCatId, String subCatName, String categoryName, String categoryId, String providerName, String providerCompany, String providerPic, String providerUid, String productSize, int quantity, double serviceFee) {
         this.subCatId = subCatId;
         this.subCatName = subCatName;
         this.categoryName = categoryName;
         this.categoryId = categoryId;
         this.providerName = providerName;
+        this.providerCompany = providerCompany;
+        this.providerPic = providerPic;
         this.providerUid = providerUid;
         this.productSize = productSize;
         this.quantity = quantity;
@@ -73,6 +75,22 @@ public class Cart {
 
     public void setProviderName(String providerName) {
         this.providerName = providerName;
+    }
+
+    public String getProviderCompany() {
+        return providerCompany;
+    }
+
+    public void setProviderCompany(String providerCompany) {
+        this.providerCompany = providerCompany;
+    }
+
+    public String getProviderPic() {
+        return providerPic;
+    }
+
+    public void setProviderPic(String providerPic) {
+        this.providerPic = providerPic;
     }
 
     public String getProviderUid() {

@@ -168,7 +168,7 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
 
     @Override
     public void onItemSelected(ServiceAndProvider serviceAndProvider) {
-        Cart cart = new Cart(serviceAndProvider.getSubCatId(),serviceAndProvider.getSubCatName(),serviceAndProvider.getCategoryName(),serviceAndProvider.getCategoryId(),serviceAndProvider.getProviderName(),serviceAndProvider.getUid(),"1",1,Double.parseDouble(serviceAndProvider.getServiceFee()));
+        Cart cart = new Cart(serviceAndProvider.getSubCatId(),serviceAndProvider.getSubCatName(),serviceAndProvider.getCategoryName(),serviceAndProvider.getCategoryId(),serviceAndProvider.getProviderName(),serviceAndProvider.getCompanyName(),serviceAndProvider.getProfilePic(),serviceAndProvider.getUid(),"1",1,Double.parseDouble(serviceAndProvider.getServiceFee()));
         viewModel.insertToCart(cart);
 
         if (cartList.size()>0){

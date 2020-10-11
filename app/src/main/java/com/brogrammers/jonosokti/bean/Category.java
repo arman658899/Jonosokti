@@ -3,8 +3,8 @@ package com.brogrammers.jonosokti.bean;
 import java.io.Serializable;
 
 public class Category implements Serializable {
-    String categoryName,imageLink,categoryId;
-    int viewed;
+    private String categoryName,imageLink,categoryId;
+    private long viewed;
 
     public Category() {
     }
@@ -32,11 +32,11 @@ public class Category implements Serializable {
         this.imageLink = imageLink;
     }
 
-    public int getViewed() {
+    public long getViewed() {
         return viewed;
     }
 
-    public void setViewed(int viewed) {
+    public void setViewed(long viewed) {
         this.viewed = viewed;
     }
 

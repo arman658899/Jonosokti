@@ -57,7 +57,7 @@
 
                     <ImageView
                         android:id="@+id/imageview_delete"
-                        android:src="@drawable/icon_delete"
+                        app:srcCompat="@drawable/icon_delete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 

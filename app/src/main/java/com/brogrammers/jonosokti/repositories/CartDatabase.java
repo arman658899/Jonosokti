@@ -10,7 +10,7 @@ import com.brogrammers.jonosokti.bean.model.Cart;
 import com.brogrammers.jonosokti.bean.model.CartDAO;
 
 
-@Database(entities = Cart.class,version = 2,exportSchema = false)
+@Database(entities = Cart.class,version = 3,exportSchema = false)
 public abstract class CartDatabase extends RoomDatabase {
     private static CartDatabase instance;
     public abstract CartDAO cartDAO();

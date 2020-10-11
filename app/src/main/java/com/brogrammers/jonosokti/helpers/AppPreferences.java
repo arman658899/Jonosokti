@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 public class AppPreferences {
     public static final String PREFERENCE_DATABASE = "jonosokti_client";
     public static final String FIELD_LOCATION = "client_location";
+    public static final String LAST_ORDER_DATE = "order_date";
+    public static final String LAST_ORDER_TIME = "order_time";
 
     public static void setUserLocationName(Context context, String location){
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE);
@@ -18,6 +20,22 @@ public class AppPreferences {
 
     public static String getUserLocationName(Context context){
         return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getString(FIELD_LOCATION,"");
+    }
+
+    public static void setLastOrderTimeAndDate(Context context, String time, String date){
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(LAST_ORDER_TIME,time);
+        editor.putString(LAST_ORDER_DATE,date);
+        editor.apply();
+    }
+
+    public static String getLastOrderDate(Context context){
+        return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getString(LAST_ORDER_DATE,"");
+    }
+
+    public static String getLastOrderTime(Context context){
+        return context.getSharedPreferences(PREFERENCE_DATABASE,Context.MODE_PRIVATE).getString(LAST_ORDER_TIME,"");
     }
 
     public static class Login{
