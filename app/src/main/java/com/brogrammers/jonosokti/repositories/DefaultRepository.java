@@ -21,21 +21,29 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class DefaultRepository {
     private static DefaultRepository repository;
     FirebaseFirestore db;
     private Context context;
     private CollectionReference COLL_CATEGORIES,COLL_SUB_CATEGORIES,COLL_SERVICES_PROVIDERS,COLL_ORDERS;
+
+    private Map<Context, ListenerRegistration> activeListeners;
+
     public DefaultRepository(Context context){
         this.context = context;
         db = ApplicationHelper.getDatabase().getDb();
@@ -43,6 +51,7 @@ public class DefaultRepository {
         COLL_SERVICES_PROVIDERS = db.collection(Constants.DB_SERVICES_PROVIDERS);
         COLL_SUB_CATEGORIES = db.collection(Constants.DB_SUB_CATEGORIES);
         COLL_ORDERS = db.collection(Constants.DB_ORDERS);
+        activeListeners = new HashMap<>();
     }
     public static DefaultRepository getInstance(Context context){
         if (repository==null) repository = new DefaultRepository(context);
@@ -207,5 +216,67 @@ public class DefaultRepository {
                         else listener.onFailed();
                     }
                 });
+    }
+
+    public void getMyOnGoingOrders(String uid,final OnDataDownloadListener<Order> listener){
+        ListenerRegistration listenerRegistration =
+                COLL_ORDERS.orderBy("createdTime", Query.Direction.DESCENDING)
+                .whereEqualTo("userUid",uid)
+                .whereEqualTo("completed",false)
+                .whereEqualTo("cancelledByMe",false)
+                .whereEqualTo("cancelledByProvider",false)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error==null && value!=null){
+                            listener.onStarted();
+                            for (DocumentSnapshot ds: value){
+                                try{
+                                    Order order = ds.toObject(Order.class);
+                                    listener.onDownloaded(order);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        listener.onFinish();
+                    }
+                });
+
+        activeListeners.put(context,listenerRegistration);
+
+    }
+
+    public void getMyOrderHistory(String uid,final OnDataDownloadListener<Order> listener){
+        ListenerRegistration listenerRegistration =
+                COLL_ORDERS.orderBy("createdTime", Query.Direction.DESCENDING)
+                        .whereEqualTo("userUid",uid)
+                        .whereEqualTo("completed",true)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (error==null && value!=null){
+                                    listener.onStarted();
+                                    for (DocumentSnapshot ds: value){
+                                        try{
+                                            Order order = ds.toObject(Order.class);
+                                            listener.onDownloaded(order);
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                                listener.onFinish();
+                            }
+                        });
+
+        activeListeners.put(context,listenerRegistration);
+
+    }
+
+    public void removeActiveListeners(Context context){
+        if (activeListeners.containsValue(context)){
+            activeListeners.get(context).remove();
+        }
     }
 }

@@ -76,13 +76,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/textview_status"
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
             android:layout_margin="8dp"
-            android:gravity="center"
             tools:text="No provider found in your area."
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textview_found_nothing"
+                android:layout_weight="2"
+                android:gravity="center"
+                tools:text="No provider found."
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/button_change"
+                android:layout_marginStart="8dp"
+                android:textSize="12sp"
+                android:text="Change"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:background="@drawable/shape_background_schedule"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

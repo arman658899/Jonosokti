@@ -11,7 +11,7 @@
         android:id="@+id/circleImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/found_nothing_image"
+        tools:src="@drawable/found_nothing_image"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Abdullah Al Hossain"
+        tools:text="Abdullah Al Hossain"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="01843658899"
+        tools:text="01843658899"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:visibility="gone"
         android:textColor="@android:color/black"
-        android:text="abdullahalhossanarman@gmail.com"
+        tools:text="abdullahalhossanarman@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberTv" />
@@ -78,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_person_24"
+            app:srcCompat="@drawable/ic_baseline_person_24"
             >
         </ImageView>
         <TextView
@@ -97,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow_right"
+            app:srcCompat="@drawable/ic_arrow_right"
             >
         </ImageView>
     </LinearLayout>
@@ -120,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_notifications"
+            app:srcCompat="@drawable/ic_notifications"
             >
         </ImageView>
         <TextView
@@ -139,7 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow_right"
+            app:srcCompat="@drawable/ic_arrow_right"
             >
         </ImageView>
     </LinearLayout>
@@ -161,7 +162,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_person_24"
+            app:srcCompat="@drawable/ic_baseline_person_24"
             >
         </ImageView>
         <TextView
@@ -179,7 +180,7 @@
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_right"
+            app:srcCompat="@drawable/ic_arrow_right"
             android:layout_gravity="center_vertical"
             >
         </ImageView>

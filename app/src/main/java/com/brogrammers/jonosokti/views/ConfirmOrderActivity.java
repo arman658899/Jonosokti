@@ -135,17 +135,17 @@ public class ConfirmOrderActivity extends AppCompatActivity implements View.OnCl
             StringBuilder stringBuilder = new StringBuilder();
             for (int i=0; i<cartList.size(); i++){
                 stringBuilder.append(cartList.get(i).getSubCatName())
-                        .append(" ")
-                        .append(cartList.get(i).getServiceFee())
                         .append("###")
-                        .append(cartList.get(i).getQuantity());
+                        .append(cartList.get(i).getQuantity())
+                        .append("###")
+                        .append(cartList.get(i).getServiceFee());
 
                 if (i == cartList.size()-1) break;
                 stringBuilder.append("$");
 
             }
 
-            Order order = new Order(ApplicationHelper.getDatabase().getAuth().getCurrentUser().getUid(),AppPreferences.UserInfo.getUserName(ConfirmOrderActivity.this),address,instructions,selectedDate,selectedTime,categoryName,stringBuilder.toString(),providerName,providerComapany,providerPic,providerUid,orderId,documentId,placedTime,"","","",true,false,false,false, Calendar.getInstance().getTimeInMillis());
+            Order order = new Order(ApplicationHelper.getDatabase().getAuth().getCurrentUser().getUid(),AppPreferences.UserInfo.getUserName(ConfirmOrderActivity.this),address,instructions,selectedDate,selectedTime,categoryName,stringBuilder.toString(),providerName,providerComapany,providerPic,providerUid,orderId,documentId,placedTime,"","","",true,false,false,false,false,false, Calendar.getInstance().getTimeInMillis());
             defaultRepository.createNewOrder(order, new OnUploadListener() {
                 @Override
                 public void onUploaded() {

@@ -9,13 +9,13 @@ public class Order implements Serializable {
     private String providerName,providerCompany,providerPhoto,providerUid;
     private String orderId,documentId;
     private String placeTime,acceptedTime,workingTime,completedTime;
-    private boolean placed,accepted,working,completed;
+    private boolean placed,accepted,working,completed,cancelledByMe,cancelledByProvider;
     private long createdTime;
 
     public Order() {
     }
 
-    public Order(String userUid, String userName, String orderAddress, String instructions, String selectedDate, String selectedTime, String categoryName, String orderDetails, String providerName, String providerCompany, String providerPhoto, String providerUid, String orderId, String documentId, String placeTime, String acceptedTime, String workingTime, String completedTime, boolean placed, boolean accepted, boolean working, boolean completed, long createdTime) {
+    public Order(String userUid, String userName, String orderAddress, String instructions, String selectedDate, String selectedTime, String categoryName, String orderDetails, String providerName, String providerCompany, String providerPhoto, String providerUid, String orderId, String documentId, String placeTime, String acceptedTime, String workingTime, String completedTime, boolean placed, boolean accepted, boolean working, boolean completed, boolean cancelledByMe, boolean cancelledByProvider, long createdTime) {
         this.userUid = userUid;
         this.userName = userName;
         this.orderAddress = orderAddress;
@@ -38,6 +38,8 @@ public class Order implements Serializable {
         this.accepted = accepted;
         this.working = working;
         this.completed = completed;
+        this.cancelledByMe = cancelledByMe;
+        this.cancelledByProvider = cancelledByProvider;
         this.createdTime = createdTime;
     }
 
@@ -215,6 +217,22 @@ public class Order implements Serializable {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public boolean isCancelledByMe() {
+        return cancelledByMe;
+    }
+
+    public void setCancelledByMe(boolean cancelledByMe) {
+        this.cancelledByMe = cancelledByMe;
+    }
+
+    public boolean isCancelledByProvider() {
+        return cancelledByProvider;
+    }
+
+    public void setCancelledByProvider(boolean cancelledByProvider) {
+        this.cancelledByProvider = cancelledByProvider;
     }
 
     public long getCreatedTime() {

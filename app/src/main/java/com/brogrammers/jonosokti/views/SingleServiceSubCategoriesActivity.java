@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.SubCategoryVerticalAdapter;
@@ -34,6 +35,7 @@ import java.util.List;
 
 public class SingleServiceSubCategoriesActivity extends AppCompatActivity implements OnItemSelectListener<SubCategory> {
     private RecyclerView recyclerView;
+    private TextView tvFoundNothing;
     private List<SubCategory> subCategories;
     private SubCategoryVerticalAdapter adapter;
     private SingleServiceSubCategoryViewModel viewModel;
@@ -82,6 +84,7 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
 
     private void initUI() {
 
+        tvFoundNothing = findViewById(R.id.textview_found_nothing);
         imageView = findViewById(R.id.imageview_category_icon);
         progressBar = findViewById(R.id.progress_bar);
         progressBarMain = findViewById(R.id.progress_bar_main);
@@ -113,6 +116,9 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
             subCategories.addAll(updatedData);
             adapter.notifyDataSetChanged();
             progressBarMain.setVisibility(View.GONE);
+            if (subCategories.size()<=0){
+                tvFoundNothing.setVisibility(View.VISIBLE);
+            }else tvFoundNothing.setVisibility(View.GONE);
         }
     };
 

@@ -45,7 +45,7 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
     private List<Cart> cartList;
     //cart items
     private double total;
-    private TextView tvTotalFee;
+    private TextView tvTotalFee,tvFoundNothing;
     private ServiceAndProviderAdapter adapter;
     private SelectServiceAndProviderViewModel viewModel;
     private Toolbar toolbar;
@@ -86,7 +86,6 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
                         }
                     })
                     .into(imageView);
-            viewModel.getAllServiceProvidersBySubCatAndLocation(mSubCategory.getDocumentId(), AppPreferences.getUserLocationName(this));
 
         }
     }
@@ -94,6 +93,8 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
     private void initUI() {
 
         tvTotalFee = findViewById(R.id.textview_total_fee);
+        tvFoundNothing = findViewById(R.id.textview_found_nothing);
+
         imageView = findViewById(R.id.imageview_category_icon);
         progressBar = findViewById(R.id.progress_bar);
         progressBarMain = findViewById(R.id.progress_bar_main);
@@ -128,6 +129,15 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
             }
         });
 
+        //change location
+        findViewById(R.id.button_change).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectServiceAndProviderActivity.this,SelectLocationActivitiy.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private Observer<List<ServiceAndProvider>> serviceAndProvidersObserver = new Observer<List<ServiceAndProvider>>() {
@@ -137,6 +147,9 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
             serviceAndProviders.addAll(updatedData);
             adapter.notifyDataSetChanged();
             progressBarMain.setVisibility(View.GONE);
+            if (serviceAndProviders.size()<=0){
+                tvFoundNothing.setText("No provider found in "+AppPreferences.getUserLocationName(SelectServiceAndProviderActivity.this));
+            }else tvFoundNothing.setText("Showing service providers in "+AppPreferences.getUserLocationName(SelectServiceAndProviderActivity.this));
         }
     };
     private Observer<List<Cart>> cartObserver = new Observer<List<Cart>>() {
@@ -155,9 +168,16 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
         }
     };
 
+
     @Override
     protected void onResume() {
         super.onResume();
+
+        progressBarMain.setVisibility(View.VISIBLE);
+
+        if (mSubCategory!=null){
+            viewModel.getAllServiceProvidersBySubCatAndLocation(mSubCategory.getDocumentId(), AppPreferences.getUserLocationName(this));
+        }
 
         viewModel.getLiveDataServiceAndProviders().removeObserver(serviceAndProvidersObserver);
         viewModel.getLiveDataServiceAndProviders().observe(this,serviceAndProvidersObserver);

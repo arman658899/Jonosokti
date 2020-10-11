@@ -24,17 +24,20 @@ import com.brogrammers.jonosokti.adapters.CategoriesAdapter;
 import com.brogrammers.jonosokti.adapters.NestedCategoryAdapter;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
+import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.helpers.AppPreferences;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
+import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
 import com.brogrammers.jonosokti.viewmodels.HomeFragmentViewModel;
 import com.brogrammers.jonosokti.views.SelectLocationActivitiy;
+import com.brogrammers.jonosokti.views.SelectServiceAndProviderActivity;
 import com.brogrammers.jonosokti.views.SingleServiceSubCategoriesActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements OnItemSelectListener<Category> {
+public class HomeFragment extends Fragment implements OnItemSelectListener<Category>, OnItemSelectListener2<SubCategory> {
     private TextView tvLocation;
     private ViewFlipper viewFlipper;
     private RecyclerView recyclerViewCategories, recyclerViewPopularCategories;
@@ -58,7 +61,7 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
         categories = new ArrayList<>();
         nestedCategories = new ArrayList<>();
         categoriesAdapter = new CategoriesAdapter(requireActivity(), this);
-        popularAdapter = new NestedCategoryAdapter(requireActivity(),nestedCategories);
+        popularAdapter = new NestedCategoryAdapter(requireActivity(),nestedCategories,this);
         categoriesAdapter.submitList(categories);
         viewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
 
@@ -152,6 +155,13 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     public void onItemSelected(Category category) {
         Intent intent = new Intent(requireActivity(), SingleServiceSubCategoriesActivity.class);
         intent.putExtra("category",category);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected2(SubCategory subCategory, int index) {
+        Intent intent = new Intent(requireActivity(), SelectServiceAndProviderActivity.class);
+        intent.putExtra("sub_cat",subCategory);
         startActivity(intent);
     }
 }
