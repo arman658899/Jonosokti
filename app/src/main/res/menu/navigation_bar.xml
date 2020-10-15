@@ -11,26 +11,8 @@
             android:title="Became a Provider"
             android:icon="@drawable/ic_person"
             />
+    </group>
 
-    </group>
-    <group android:checkableBehavior="single">
-        <item
-            android:title="Profile"
-            >
-            <menu>
-                <item
-                    android:id="@+id/profile"
-                    android:title="Profile"
-                    android:icon="@drawable/ic_person"
-                    />
-                <item
-                    android:id="@+id/logout"
-                    android:title="Log Out"
-                    android:icon="@drawable/ic_logout"
-                    />
-            </menu>
-        </item>
-    </group>
     <group android:checkableBehavior="single">
         <item
             android:title="Communicate"
@@ -58,5 +40,12 @@
                     />
             </menu>
         </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout"
+            android:title="Log Out"
+            android:icon="@drawable/ic_logout"
+            />
     </group>
 </menu>

@@ -10,6 +10,12 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start"
+        >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +34,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/admin_nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/header"
+            app:menu="@menu/navigation_bar" />
+    </androidx.drawerlayout.widget.DrawerLayout>
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomappbar"
         android:layout_width="match_parent"
@@ -65,4 +79,5 @@
         app:layout_anchor="@id/bottomappbar"
         app:maxImageSize="28dp"
         app:tint="@android:color/background_light" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
