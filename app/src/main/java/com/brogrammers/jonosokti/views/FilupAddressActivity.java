@@ -17,10 +17,14 @@ public class FilupAddressActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
 
     String name="",mob="",address="",flat="",type="";
+
+    private boolean isFromProfile = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filup_address);
+
+        isFromProfile = getIntent().getBooleanExtra("profile",false);
 
         etName = findViewById(R.id.nameEt);
         etMob = findViewById(R.id.mbl_number_Et);
@@ -74,12 +78,20 @@ public class FilupAddressActivity extends AppCompatActivity {
                 AppPreferences.UserInfo.setUserFlat(FilupAddressActivity.this,flat);
                 AppPreferences.UserInfo.setUserAddressType(FilupAddressActivity.this,type);
 
+                if (isFromProfile) {
+                    finish();
+                    return;
+                }
+
                 Intent intent = new Intent(FilupAddressActivity.this,ConfirmOrderActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
+
+        //backbutton
+        findViewById(R.id.imageView).setOnClickListener(v -> onBackPressed());
 
     }
 }

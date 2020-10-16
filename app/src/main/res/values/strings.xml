@@ -87,4 +87,6 @@
     <string name="pay">Payment Option</string>
     <string name="invalid_otp">Invalid OTP Code.</string>
     <string name="delivery_detials">Delivery Details</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

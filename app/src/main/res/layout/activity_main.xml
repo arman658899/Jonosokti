@@ -1,83 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerlayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start"
-        >
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?actionBarSize"
-        tools:context=".views.MainActivity">
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout
             android:id="@+id/fragment_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/admin_nav_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/header"
-            app:menu="@menu/navigation_bar" />
-    </androidx.drawerlayout.widget.DrawerLayout>
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomappbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_gravity="bottom"
-        android:backgroundTint="@android:color/background_light"
-        android:theme="@style/Theme.MaterialComponents"
-        app:contentInsetStart="0dp"
-        app:fabCradleMargin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_marginBottom="?attr/actionBarSize" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_gravity="bottom"
-        android:background="@android:color/transparent"
-        android:elevation="0dp"
-        android:outlineAmbientShadowColor="@android:color/transparent"
-        android:outlineProvider="none"
-        android:outlineSpotShadowColor="@android:color/transparent"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        tools:targetApi="p" />
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomappbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@android:color/background_light"
+            android:theme="@style/Theme.MaterialComponents"
+            app:contentInsetStart="0dp"
+            app:fabCradleMargin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            android:outlineProvider="none"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_menu"
+            tools:targetApi="p" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_message_24"
+            android:theme="@style/Theme.MaterialComponents"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/bottomappbar"
+            app:maxImageSize="28dp"
+            app:tint="@android:color/background_light" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/admin_nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_baseline_message_24"
-        android:theme="@style/Theme.MaterialComponents"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="0dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/bottomappbar"
-        app:maxImageSize="28dp"
-        app:tint="@android:color/background_light" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/navigation_bar" />
+</androidx.drawerlayout.widget.DrawerLayout>

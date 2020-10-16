@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderStatusActivity extends AppCompatActivity {
-    private TextView tvOrderId,tvTotal,tvSubTotal,tvProviderName,tvRating,tvViewProfile,tvDate,tvTime;
+    private TextView tvOrderId,tvTotal,tvSubTotal,tvProviderName,tvRating,tvViewProfile,tvDate,tvTime,tvOrderDetails;
     private TextView tvPlacedTime,tvAcceptedTime,tvWorkingTime,tvCompletedTime,tvCancel,tvHelpLine;
     private RecyclerView recyclerView;
     private CircularImageView cvPic;
@@ -52,6 +52,7 @@ public class OrderStatusActivity extends AppCompatActivity {
         tvHelpLine = findViewById(R.id.textview_helpline);
         tvDate = findViewById(R.id.textview_date);
         tvTime = findViewById(R.id.textview_time);
+        tvOrderDetails = findViewById(R.id.textview_client_name);
 
         tvPlacedTime = findViewById(R.id.textview_time_placed);
         tvAcceptedTime = findViewById(R.id.textview_time_accepted);
@@ -85,6 +86,9 @@ public class OrderStatusActivity extends AppCompatActivity {
                 Toast.makeText(OrderStatusActivity.this, "On developing.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //change order button
+        findViewById(R.id.button_details_change).setVisibility(View.GONE);
     }
 
     @Override
@@ -113,6 +117,11 @@ public class OrderStatusActivity extends AppCompatActivity {
         }
         try{
             tvDate.setText(mOrder.getSelectedDate());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            tvOrderDetails.setText(mOrder.getOrderAddress());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -154,25 +163,27 @@ public class OrderStatusActivity extends AppCompatActivity {
         try{
             if (mOrder.isPlaced()){
                 cbPlaced.setChecked(true);
+                tvPlacedTime.setText(mOrder.getPlaceTime());
             }
             if (mOrder.isAccepted()){
                 cbAccepted.setChecked(true);
+                tvAcceptedTime.setText(mOrder.getAcceptedTime());
             }
             if (mOrder.isWorking()){
                 cbWorked.setChecked(true);
-                tvCancel.setVisibility(View.GONE);
+                tvWorkingTime.setText(mOrder.getWorkingTime());
             }
             if (mOrder.isCompleted()){
                 cbCompleted.setChecked(true);
-                tvCancel.setVisibility(View.GONE);
+                tvCompletedTime.setText(mOrder.getCompletedTime());
             }
             if (mOrder.isCancelledByMe()){
-                tvCancel.setText("You cancelled order.");
-                tvCancel.setEnabled(false);
+                tvCancel.setText("You have cancelled order.");
+                tvCancel.setVisibility(View.VISIBLE);
             }
             if (mOrder.isCancelledByProvider()){
-                tvCancel.setText("Provider cancelled order.");
-                tvCancel.setEnabled(false);
+                tvCancel.setText("Provider has cancelled order.");
+                tvCancel.setVisibility(View.VISIBLE);
             }
         }catch (Exception e){
 

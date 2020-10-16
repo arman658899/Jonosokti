@@ -204,6 +204,24 @@ public class SelectServiceAndProviderActivity extends AppCompatActivity implemen
 
     }
 
+    @Override
+    public void onDelete(ServiceAndProvider serviceAndProvider) {
+
+    }
+
+    @Override
+    public void onCancel(ServiceAndProvider serviceAndProvider) {
+
+    }
+
+    @Override
+    public void onApprove(ServiceAndProvider serviceAndProvider) {
+        //using ass show profile
+        Intent intent = new Intent(SelectServiceAndProviderActivity.this,ProviderProfileActivity.class);
+        intent.putExtra("provider",serviceAndProvider.getUid());
+        startActivity(intent);
+    }
+
     private void showConfirmationOfDeleteAllItemsFromCart(Cart cart) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Confirmation")

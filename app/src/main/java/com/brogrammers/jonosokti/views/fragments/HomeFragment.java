@@ -15,30 +15,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.CategoriesAdapter;
 import com.brogrammers.jonosokti.adapters.NestedCategoryAdapter;
+import com.brogrammers.jonosokti.bean.Banner;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
 import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.helpers.AppPreferences;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
+import com.brogrammers.jonosokti.listeners.OnMainActivityCallback;
 import com.brogrammers.jonosokti.viewmodels.HomeFragmentViewModel;
+import com.brogrammers.jonosokti.views.SearchActivity;
 import com.brogrammers.jonosokti.views.SelectLocationActivitiy;
 import com.brogrammers.jonosokti.views.SelectServiceAndProviderActivity;
 import com.brogrammers.jonosokti.views.SingleServiceSubCategoriesActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements OnItemSelectListener<Category>, OnItemSelectListener2<SubCategory> {
     private TextView tvLocation;
+    private ImageButton imageButtonMenu;
     private ViewFlipper viewFlipper;
     private RecyclerView recyclerViewCategories, recyclerViewPopularCategories;
     private List<Category> categories;
@@ -49,8 +58,10 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     //viewmodel
     private HomeFragmentViewModel viewModel;
 
-    public HomeFragment() {
+    private OnMainActivityCallback mainActivityCallback;
+    public HomeFragment(OnMainActivityCallback mainActivityCallback) {
         // Required empty public constructor
+        this.mainActivityCallback = mainActivityCallback;
     }
 
 
@@ -79,6 +90,10 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        imageButtonMenu = view.findViewById(R.id.imageButton);
+        imageButtonMenu.setOnClickListener(v -> {
+            if (mainActivityCallback!=null) mainActivityCallback.onOpenDrawer();
+        });
         tvLocation = view.findViewById(R.id.textview_location);
         tvLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +102,19 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
                 startActivity(intent);
             }
         });
+
+        //searchview
+        view.findViewById(R.id.searchView).setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), SearchActivity.class);
+            startActivity(intent);
+        });
+
         viewFlipper = view.findViewById(R.id.viewFlipper);
-        intiViewFlipper();
+        viewFlipper.setFlipInterval(3000);
+        viewFlipper.setAutoStart(true);
+        viewFlipper.setInAnimation(getActivity(),android.R.anim.slide_in_left);
+        viewFlipper.setOutAnimation(getActivity(),android.R.anim.slide_out_right);
+        //intiViewFlipper();
         recyclerViewCategories = view.findViewById(R.id.recyclerview_CategoryView_home);
         recyclerViewCategories.setHasFixedSize(true);
         recyclerViewCategories.setLayoutManager(new GridLayoutManager(requireActivity(), 3));
@@ -104,6 +130,7 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
         viewModel.getCategoriesLiveData().observe(requireActivity(), categoryObserver);
         viewModel.getPopularNestedCategories().removeObserver(nestedCategoyObserver);
         viewModel.getPopularNestedCategories().observe(requireActivity(),nestedCategoyObserver);
+
 
     }
 
@@ -125,6 +152,27 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
         }
     };
 
+    private Observer<List<Banner>> bannerObserver = new Observer<List<Banner>>() {
+        @Override
+        public void onChanged(List<Banner> banners) {
+            if (banners.size()>0) updateViewFlipper(banners);
+        }
+    };
+
+    private void updateViewFlipper(List<Banner> banners) {
+        viewFlipper.setVisibility(View.VISIBLE);
+        for (Banner banner: banners){
+            ImageView imageView = new ImageView(getActivity());
+            Glide.with(requireActivity())
+                    .load(banner.getLink())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
+            //imageView1.setBackgroundResource(images[0]);
+            viewFlipper.addView(imageView);
+        }
+    }
+
+
     private void intiViewFlipper() {
         ImageView imageView = new ImageView(getActivity());
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -143,6 +191,8 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     public void onResume() {
         super.onResume();
 
+        viewModel.getLiveDataBanners().removeObserver(bannerObserver);
+        viewModel.getLiveDataBanners().observe(requireActivity(),bannerObserver);
         viewFlipper.startFlipping();
 
         if (AppPreferences.getUserLocationName(requireActivity()).isEmpty()){
@@ -159,9 +209,31 @@ public class HomeFragment extends Fragment implements OnItemSelectListener<Categ
     }
 
     @Override
+    public void onDelete(Category category) {
+
+    }
+
+    @Override
+    public void onCancel(Category category) {
+
+    }
+
+    @Override
+    public void onApprove(Category category) {
+
+    }
+
+    @Override
     public void onItemSelected2(SubCategory subCategory, int index) {
         Intent intent = new Intent(requireActivity(), SelectServiceAndProviderActivity.class);
         intent.putExtra("sub_cat",subCategory);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected2(@NotNull Category category) {
+        Intent intent = new Intent(requireActivity(), SingleServiceSubCategoriesActivity.class);
+        intent.putExtra("category",category);
         startActivity(intent);
     }
 }

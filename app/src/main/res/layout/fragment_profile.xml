@@ -7,100 +7,105 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     >
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circleImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        tools:src="@drawable/found_nothing_image"
-        android:layout_marginTop="30dp"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-    </com.mikhaellopez.circularimageview.CircularImageView>
 
-    <TextView
-        android:id="@+id/nameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        tools:text="Abdullah Al Hossain"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
-    <TextView
-        android:id="@+id/numberTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        tools:text="01843658899"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTv" />
-    <TextView
-        android:id="@+id/mailTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        android:textColor="@android:color/black"
-        tools:text="abdullahalhossanarman@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberTv" />
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mailTv"
-        app:srcCompat="@drawable/profile_ui_design" />
+        <LinearLayout
+            android:background="@drawable/shape_background_schedule"
+            android:weightSum="4"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_profile"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="40dp"/>
+
+           <LinearLayout
+               android:padding="8dp"
+               android:layout_weight="3"
+               android:orientation="vertical"
+               android:layout_width="0dp"
+               android:gravity="center_vertical"
+               android:layout_height="match_parent">
+
+               <TextView
+                   android:id="@+id/nameTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:textStyle="bold"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/circleImageView"
+                   tools:text="Abdullah Al Hossain" />
+
+               <TextView
+                   android:id="@+id/numberTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="5dp"
+                   android:textColor="@android:color/black"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/nameTv"
+                   tools:text="01843658899" />
+
+           </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:id="@+id/profile_Ln"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:weightSum="10"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:selectableItemBackground"
+        android:orientation="horizontal"
+        android:weightSum="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
         <ImageView
-            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_baseline_person_24"
-            >
-        </ImageView>
+            android:layout_weight="2"
+            app:srcCompat="@drawable/ic_baseline_person_24"></ImageView>
+
         <TextView
-            android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:text="Profile"
+            android:layout_weight="6"
             android:gravity="center_vertical"
-            >
-        </TextView>
+            android:text="Profile"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
+
         <ImageView
-            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_arrow_right"
-            >
-        </ImageView>
+            android:layout_weight="2"
+            app:srcCompat="@drawable/ic_arrow_right"></ImageView>
     </LinearLayout>
 
     <LinearLayout

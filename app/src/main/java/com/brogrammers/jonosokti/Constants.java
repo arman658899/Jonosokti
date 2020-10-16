@@ -21,6 +21,9 @@ public class Constants {
     public static final String DB_SERVICES_PROVIDERS = "SERVICES_WITH_PROVIDERS";
     public static final String DB_USERS = "USERS";
     public static final String DB_ORDERS = "SERVICE_ORDERS";
+    public static final String DB_BANNERS = "BANNERS";
+    public static final String STORAGE_BANNERS = "BANNERS_STORAGE";
+
 
     //all locations
     public static final String[] PROVIDER_LOCATIONS = {
@@ -50,5 +53,7 @@ public class Constants {
     public static final String TAG = "LOGS_DATA";
     public static final String DATA_PERSISTENCE_EXCEPTION = "Data persistence exception.";
 
-
+    public static final String DELETE = "DELETE";
+    public static final String CANCEL = "CANCEL";
+    public static final String APPROVE = "APPROVE";
 }

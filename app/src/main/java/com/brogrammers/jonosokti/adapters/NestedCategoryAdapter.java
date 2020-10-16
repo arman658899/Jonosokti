@@ -1,13 +1,16 @@
 package com.brogrammers.jonosokti.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brogrammers.jonosokti.R;
+import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
 import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
@@ -48,6 +51,17 @@ public class NestedCategoryAdapter extends RecyclerView.Adapter<NestedCategoryVi
         holder.tvCategoryName.setText(nestedCategories.get(position).getPopularCategory());
         SubCategoryHorizontalAdapter adapter = new SubCategoryHorizontalAdapter(context,nestedCategories.get(position).getCategories(),listener2);
         holder.recyclerView.setAdapter(adapter);
+
+        holder.tvViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Category category = new Category();
+                category.setCategoryId(nestedCategories.get(position).getCategories().get(0).getCategoryId());
+                category.setCategoryName(nestedCategories.get(position).getCategories().get(0).getCategoryName());
+                category.setImageLink(nestedCategories.get(position).getCategories().get(0).getPhotoLink());
+                if (listener2!=null) listener2.onItemSelected2(category);
+            }
+        });
     }
 
     @Override

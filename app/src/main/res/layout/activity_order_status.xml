@@ -59,6 +59,7 @@
 
             <include layout="@layout/order_details_order_id"/>
             <include layout="@layout/confirm_order_service_details"/>
+            <include layout="@layout/confirm_order_customer_details"/>
             <include layout="@layout/order_details_provider_layout"/>
             <include layout="@layout/order_details_order_status"/>
             <include layout="@layout/order_details_need_help"/>
