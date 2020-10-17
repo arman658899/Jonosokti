@@ -1,15 +1,17 @@
 package com.brogrammers.jonosokti.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SubCategory implements Serializable {
-    String subCatName,categoryName,categoryId,photoLink,documentId;
-    String minRange,maxRange;
+    private String subCatName,categoryName,categoryId,photoLink,documentId;
+    private String minRange,maxRange;
+    private List<String> keys;
 
     public SubCategory() {
     }
 
-    public SubCategory(String subCatName, String categoryName, String categoryId, String photoLink, String documentId, String minRange, String maxRange) {
+    public SubCategory(String subCatName, String categoryName, String categoryId, String photoLink, String documentId, String minRange, String maxRange, List<String> keys) {
         this.subCatName = subCatName;
         this.categoryName = categoryName;
         this.categoryId = categoryId;
@@ -17,6 +19,7 @@ public class SubCategory implements Serializable {
         this.documentId = documentId;
         this.minRange = minRange;
         this.maxRange = maxRange;
+        this.keys = keys;
     }
 
     public String getSubCatName() {
@@ -73,5 +76,13 @@ public class SubCategory implements Serializable {
 
     public void setMaxRange(String maxRange) {
         this.maxRange = maxRange;
+    }
+
+    public List<String> getKeys() {
+        return keys;
+    }
+
+    public void setKeys(List<String> keys) {
+        this.keys = keys;
     }
 }

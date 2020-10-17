@@ -8,8 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.brogrammers.jonosokti.Constants;
+import com.brogrammers.jonosokti.bean.Banner;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.Order;
+import com.brogrammers.jonosokti.bean.Provider;
 import com.brogrammers.jonosokti.bean.ServiceAndProvider;
 import com.brogrammers.jonosokti.bean.SubCategory;
 import com.brogrammers.jonosokti.helpers.ApplicationHelper;
@@ -40,7 +42,7 @@ public class DefaultRepository {
     private static DefaultRepository repository;
     FirebaseFirestore db;
     private Context context;
-    private CollectionReference COLL_CATEGORIES,COLL_SUB_CATEGORIES,COLL_SERVICES_PROVIDERS,COLL_ORDERS;
+    private CollectionReference COLL_CATEGORIES,COLL_SUB_CATEGORIES,COLL_SERVICES_PROVIDERS,COLL_ORDERS,COLL_PROVIDERS,COLL_BANNERS;
 
     private Map<Context, ListenerRegistration> activeListeners;
 
@@ -51,6 +53,10 @@ public class DefaultRepository {
         COLL_SERVICES_PROVIDERS = db.collection(Constants.DB_SERVICES_PROVIDERS);
         COLL_SUB_CATEGORIES = db.collection(Constants.DB_SUB_CATEGORIES);
         COLL_ORDERS = db.collection(Constants.DB_ORDERS);
+        COLL_PROVIDERS = db.collection(Constants.DB_PROVIDERS);
+        COLL_BANNERS = db.collection(Constants.DB_BANNERS);
+
+
         activeListeners = new HashMap<>();
     }
     public static DefaultRepository getInstance(Context context){
@@ -224,7 +230,6 @@ public class DefaultRepository {
                 .whereEqualTo("userUid",uid)
                 .whereEqualTo("completed",false)
                 .whereEqualTo("cancelledByMe",false)
-                .whereEqualTo("cancelledByProvider",false)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -278,5 +283,112 @@ public class DefaultRepository {
         if (activeListeners.containsValue(context)){
             activeListeners.get(context).remove();
         }
+    }
+
+    //order updating
+
+    public void updateCancelByUser(Order order, OnUploadListener listener) {
+        COLL_ORDERS.document(order.getDocumentId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        HashMap<String,Object> hashMap = new HashMap<>();
+                        hashMap.put("cancelledByMe",true);
+                        if (documentSnapshot.exists()){
+
+                            documentSnapshot.getReference()
+                                    .set(hashMap,SetOptions.merge())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) listener.onUploaded();
+                                            else listener.onFailed();
+                                        }
+                                    });
+                        }else listener.onFailed();
+                    }
+                });
+    }
+
+    public void deleteOrder(Order order, OnUploadListener listener) {
+        COLL_ORDERS.document(order.getDocumentId())
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) listener.onUploaded();
+                        else listener.onFailed();
+                    }
+                });
+    }
+
+    public void getProiderByUid(String mProviderUid, OnDataDownloadListener<Provider> listener) {
+        COLL_PROVIDERS.document(mProviderUid)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot!=null){
+                            try{
+                                Provider provider = documentSnapshot.toObject(Provider.class);
+                                listener.onDownloaded(provider);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                                listener.onDownloaded(new Provider());
+                            }
+                        }
+
+                        listener.onFinish();
+                    }
+                });
+    }
+
+
+    //banners
+    public void getBanners(OnDataDownloadListener<Banner> listener) {
+        ListenerRegistration listenerRegistration = COLL_BANNERS.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error==null && value!=null){
+                            listener.onStarted();
+                            for (DocumentSnapshot ds: value){
+                                try{
+                                    Banner banner = ds.toObject(Banner.class);
+                                    listener.onDownloaded(banner);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        listener.onFinish();
+                    }
+                });
+        activeListeners.put(context,listenerRegistration);
+    }
+
+    public void getSubCategoriesByKey(List<String> keys, OnDataDownloadListener<SubCategory> listener) {
+        COLL_SUB_CATEGORIES.whereArrayContainsAny("keys",keys)
+                .limit(10)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (queryDocumentSnapshots!=null){
+                            listener.onStarted();
+                            for (DocumentSnapshot ds: queryDocumentSnapshots){
+                                try{
+                                    SubCategory subCategory = ds.toObject(SubCategory.class);
+                                    listener.onDownloaded(subCategory);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        listener.onFinish();
+                    }
+                });
     }
 }

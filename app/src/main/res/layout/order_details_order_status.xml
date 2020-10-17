@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:text="@string/started"
             android:textSize="12sp"
+            android:textColor="@color/color_green"
             app:layout_constraintBottom_toBottomOf="@+id/textview_order_accepted"
             app:layout_constraintEnd_toStartOf="@+id/textview_completed"
             app:layout_constraintStart_toEndOf="@+id/textview_order_accepted"
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Completed"
             android:textSize="12sp"
+            android:textColor="@color/color_green"
             app:layout_constraintBottom_toBottomOf="@+id/textview_work_started"
             app:layout_constraintEnd_toEndOf="@+id/view3"
             app:layout_constraintStart_toEndOf="@+id/textview_work_started"
@@ -81,7 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:text="@string/order_cancel"
+            tools:text="@string/order_cancel"
+            android:visibility="gone"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView1"
@@ -177,6 +180,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Time Here"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_placed"
             app:layout_constraintStart_toStartOf="@+id/checkbox_placed"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_placed" />
@@ -187,6 +191,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text="Time Here"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_accepted"
             app:layout_constraintStart_toStartOf="@+id/checkbox_accepted"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_accepted" />
@@ -197,6 +202,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text="Time Here"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_started"
             app:layout_constraintStart_toStartOf="@+id/checkbox_started"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_started" />
@@ -207,6 +213,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text="Time Here"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_completed"
             app:layout_constraintStart_toStartOf="@+id/checkbox_completed"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_completed" />

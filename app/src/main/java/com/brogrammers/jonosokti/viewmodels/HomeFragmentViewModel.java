@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.brogrammers.jonosokti.bean.Banner;
 import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.NestedCategory;
 import com.brogrammers.jonosokti.bean.SubCategory;
@@ -23,6 +24,8 @@ public class HomeFragmentViewModel extends AndroidViewModel {
 
     private List<Category> categories;
     private MutableLiveData<List<Category>> mlCategories;
+    private List<Banner> bannerList;
+    private MutableLiveData<List<Banner>> mlBanners;
 
     private List<NestedCategory> nestedCategoryList;
     private MutableLiveData<List<NestedCategory>> mlNestedCategoryList;
@@ -35,12 +38,39 @@ public class HomeFragmentViewModel extends AndroidViewModel {
 
         categories = new ArrayList<>();
         mlCategories = new MutableLiveData<>();
+        bannerList = new ArrayList<>();
         hashedPopularCategories = new HashMap<>();
         nestedCategoryList = new ArrayList<>();
         mlNestedCategoryList = new MutableLiveData<>();
+        mlBanners = new MutableLiveData<>();
         //get values from server
         getAllCategoriesFromDatabase();
         getPopularCategories();
+        getBanners();
+    }
+
+    private void getBanners() {
+        repository.getBanners(new OnDataDownloadListener<Banner>() {
+            @Override
+            public void onStarted() {
+                bannerList.clear();
+            }
+
+            @Override
+            public void onDownloaded(Banner banner) {
+                bannerList.add(banner);
+            }
+
+            @Override
+            public void onDownloaded(List<Banner> list) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                mlBanners.postValue(bannerList);
+            }
+        });
     }
 
     public void getAllCategoriesFromDatabase(){
@@ -126,6 +156,10 @@ public class HomeFragmentViewModel extends AndroidViewModel {
 
     public LiveData<List<NestedCategory>> getPopularNestedCategories(){
         return mlNestedCategoryList;
+    }
+
+    public LiveData<List<Banner>> getLiveDataBanners(){
+        return mlBanners;
     }
 
 }

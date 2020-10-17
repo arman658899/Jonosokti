@@ -1,5 +1,6 @@
 package com.brogrammers.jonosokti.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.helpers.AppPreferences;
+import com.brogrammers.jonosokti.views.FilupAddressActivity;
 
 
 public class ProfileFragment extends Fragment {
@@ -36,6 +38,12 @@ public class ProfileFragment extends Fragment {
         tvName = view.findViewById(R.id.nameTv);
         tvMobile = view.findViewById(R.id.numberTv);
 
+
+        view.findViewById(R.id.address_Ln).setOnClickListener(v ->{
+            Intent intent = new Intent(requireActivity(), FilupAddressActivity.class);
+            intent.putExtra("profile",true);
+            startActivity(intent);
+        });
     }
 
     @Override

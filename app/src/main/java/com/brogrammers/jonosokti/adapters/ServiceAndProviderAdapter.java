@@ -53,6 +53,13 @@ public class ServiceAndProviderAdapter extends RecyclerView.Adapter<ServiceAndPr
                 if (listener!=null) listener.onItemSelected(serviceAndProviders.get(position));
             }
         });
+
+        holder.tvViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null) listener.onApprove(serviceAndProviders.get(position));
+            }
+        });
     }
 
     @Override

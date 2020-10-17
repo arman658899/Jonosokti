@@ -35,7 +35,7 @@
                     />
                 <item
                     android:id="@+id/developer_option"
-                    android:title="Developer Option"
+                    android:title="About Developer"
                     android:icon="@drawable/ic_person"
                     />
             </menu>

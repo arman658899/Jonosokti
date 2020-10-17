@@ -39,17 +39,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textview_provider_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Name here"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_provider"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageview_provider"
-            app:layout_constraintTop_toTopOf="@+id/imageview_provider" />
+            app:layout_constraintTop_toTopOf="@+id/imageview_provider">
+
+            <TextView
+                android:id="@+id/textview_provider_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name here"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_provider"
+                app:layout_constraintStart_toEndOf="@+id/imageview_provider"
+                app:layout_constraintTop_toTopOf="@+id/imageview_provider" />
+
+            <TextView
+                android:id="@+id/textview_view_profile"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="12sp"
+                android:text="View Profile"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <View
             android:id="@+id/view2"

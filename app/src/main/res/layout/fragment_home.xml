@@ -21,6 +21,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/icon_menu"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textview_location"
                 android:layout_width="wrap_content"
@@ -29,7 +40,6 @@
                 android:drawableEnd="@drawable/icon_arrow_expand"
                 android:drawablePadding="20dp"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,9 +55,12 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/shape_rec_1"
+            android:background="@drawable/shape_background_schedule"
             android:drawableStart="@drawable/icon_search"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
@@ -71,6 +84,7 @@
 
             <ViewFlipper
                 android:id="@+id/viewFlipper"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp" />

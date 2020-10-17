@@ -32,7 +32,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ConfirmOrderActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView tvTime,tvDate,tvProviderName,tvSubTotal,tvTotal,tvCustomerDetails;
+    private TextView tvTime,tvDate,tvProviderName,tvSubTotal,tvTotal,tvCustomerDetails,tvViewProfile;
     private EditText etInstructions;
     private RecyclerView recyclerView;
     private List<Cart> cartList;
@@ -65,6 +65,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements View.OnCl
         tvSubTotal = findViewById(R.id.textview_subtotal_amount);
         tvTotal = findViewById(R.id.textview_total);
         tvCustomerDetails = findViewById(R.id.textview_client_name);
+        tvViewProfile = findViewById(R.id.textview_view_profile);
 
         etInstructions = findViewById(R.id.edittext_instructions);
 
@@ -82,6 +83,8 @@ public class ConfirmOrderActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.button_confirm_order).setOnClickListener(this);
         //backbutton
         findViewById(R.id.imageView4).setOnClickListener(v -> onBackPressed());
+
+
 
     }
 
@@ -167,7 +170,9 @@ public class ConfirmOrderActivity extends AppCompatActivity implements View.OnCl
     private String getFormatedTime(long currentTime) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(currentTime);
-        return DateFormat.format("dd-MM-yyyy hh:mm aa",calendar).toString();
+        String date = DateFormat.format("dd-MM-yyyy",calendar).toString();
+        String time = DateFormat.format("hh:mm aa",calendar).toString();
+        return date+"\n"+time;
     }
 
     private String createOrderId(String documentId) {
@@ -201,7 +206,17 @@ public class ConfirmOrderActivity extends AppCompatActivity implements View.OnCl
                 providerComapany = cartList.get(0).getProviderCompany();
                 providerPic = cartList.get(0).getProviderPic();
                 categoryName = cartList.get(0).getCategoryName();
-            }
+
+
+                //view provider details
+                findViewById(R.id.textview_view_profile).setOnClickListener(v -> {
+                    //using ass show profile
+                    Intent intent = new Intent(ConfirmOrderActivity.this,ProviderProfileActivity.class);
+                    intent.putExtra("provider",cartList.get(0).getProviderUid());
+                    startActivity(intent);
+                });
+
+            }else tvViewProfile.setVisibility(View.GONE);
             tvProviderName.setText(providerName);
 
 

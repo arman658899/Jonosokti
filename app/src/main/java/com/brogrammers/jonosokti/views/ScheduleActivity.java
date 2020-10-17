@@ -16,11 +16,14 @@ import com.brogrammers.jonosokti.Constants;
 import com.brogrammers.jonosokti.R;
 import com.brogrammers.jonosokti.adapters.AdapterSchedulDate;
 import com.brogrammers.jonosokti.adapters.AdapterSchedulTime;
+import com.brogrammers.jonosokti.bean.Category;
 import com.brogrammers.jonosokti.bean.Date;
 import com.brogrammers.jonosokti.bean.Time;
 import com.brogrammers.jonosokti.helpers.AppPreferences;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener;
 import com.brogrammers.jonosokti.listeners.OnItemSelectListener2;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +68,11 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
                 adapterSchedulTime.notifyDataSetChanged();
             }
+
+            @Override
+            public void onItemSelected2(@NotNull Category category) {
+
+            }
         });
         adapterSchedulDate =new AdapterSchedulDate(this, dates, new OnItemSelectListener2<Date>() {
             @Override
@@ -75,6 +83,11 @@ public class ScheduleActivity extends AppCompatActivity {
                     else dates.get(i).setClicked(false);
                 }
                 adapterSchedulDate.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemSelected2(@NotNull Category category) {
+
             }
         });
         recyclerViewDate = findViewById(R.id.recyclerview_date);

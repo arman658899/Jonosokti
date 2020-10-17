@@ -11,12 +11,13 @@ import com.brogrammers.jonosokti.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class ServiceAndProviderViewHolder extends RecyclerView.ViewHolder {
-    public TextView tvCompanyName,tvServiceName,tvServicePrice,tvProviderName;
+    public TextView tvCompanyName,tvServiceName,tvServicePrice,tvProviderName,tvViewProfile;
     public CircularImageView circularImage;
     public Button buttonSelect;
     public ServiceAndProviderViewHolder(@NonNull View itemView) {
         super(itemView);
         tvCompanyName = itemView.findViewById(R.id.textView_company_name);
+        tvViewProfile = itemView.findViewById(R.id.textview_view_profile);
         tvServiceName = itemView.findViewById(R.id.textView_service_name);
         tvServicePrice = itemView.findViewById(R.id.textView_price);
         tvProviderName = itemView.findViewById(R.id.textView_provider_name);

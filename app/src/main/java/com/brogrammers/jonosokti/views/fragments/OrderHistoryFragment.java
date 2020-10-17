@@ -122,4 +122,19 @@ public class OrderHistoryFragment extends Fragment implements OnItemSelectListen
         startActivity(intent);
     }
 
+    @Override
+    public void onDelete(Order order) {
+
+    }
+
+    @Override
+    public void onCancel(Order order) {
+
+    }
+
+    @Override
+    public void onApprove(Order order) {
+
+    }
+
 }

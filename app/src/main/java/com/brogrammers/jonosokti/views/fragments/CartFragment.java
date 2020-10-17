@@ -130,6 +130,21 @@ public class CartFragment extends Fragment implements OnItemSelectListener<Cart>
         showDeleteConfirmation(cart);
     }
 
+    @Override
+    public void onDelete(Cart cart) {
+
+    }
+
+    @Override
+    public void onCancel(Cart cart) {
+
+    }
+
+    @Override
+    public void onApprove(Cart cart) {
+
+    }
+
     private void showDeleteConfirmation(Cart cart) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity())
                 .setTitle("Confirmation")

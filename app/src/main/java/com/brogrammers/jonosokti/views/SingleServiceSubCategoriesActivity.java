@@ -138,4 +138,19 @@ public class SingleServiceSubCategoriesActivity extends AppCompatActivity implem
         intent.putExtra("sub_cat",subCategory);
         startActivity(intent);
     }
+
+    @Override
+    public void onDelete(SubCategory subCategory) {
+
+    }
+
+    @Override
+    public void onCancel(SubCategory subCategory) {
+
+    }
+
+    @Override
+    public void onApprove(SubCategory subCategory) {
+
+    }
 }
