@@ -21,19 +21,19 @@ public class SliderAdapter extends PagerAdapter {
         this.context = context;
     }
     int image[]={
-            R.drawable.service1,
-            R.drawable.service1,
-            R.drawable.service1
+            R.drawable.intro_1,
+            R.drawable.intro_2,
+            R.drawable.intro_3
 };
     int title[]={
-            R.string.facebook_page_details,
-            R.string.facebook_page_details,
-            R.string.facebook_page_details
+            R.string.intro_1,
+            R.string.intro_2,
+            R.string.intro_3
     };
     int description[]={
-            R.string.facebook_page_details,
-            R.string.facebook_page_details,
-            R.string.facebook_page_details
+            R.string.intro_1_d,
+            R.string.intro_2_d,
+            R.string.intro_3_d
     };
 
     @Override

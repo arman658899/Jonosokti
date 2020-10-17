@@ -6,6 +6,14 @@
     <string name="content_description">Image</string>
 
     <string name="servicepro">Service Provider</string>
+    <string name="intro_1">Welcome to Jonosokti Platform</string>
+    <string name="intro_1_d">A time saving and hassle free online home service provider</string>
+    <string name="intro_2">Multi Features that you need</string>
+    <string name="intro_2_d">Different services in many categories which helps you to choose</string>
+    <string name="intro_3">Service provider at your doorstep</string>
+    <string name="intro_3_d">Our enlisted provider of your nearest place available at your doorstep anytime</string>
+
+
 
     <!--
     On Boarding
