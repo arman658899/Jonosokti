@@ -35,7 +35,6 @@ public class SliderAdapter extends PagerAdapter {
             R.string.intro_2_d,
             R.string.intro_3_d
     };
-
     @Override
     public int getCount() {
         return title.length;
@@ -45,7 +44,6 @@ public class SliderAdapter extends PagerAdapter {
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view==(ConstraintLayout)object;
     }
-
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -65,7 +63,6 @@ public class SliderAdapter extends PagerAdapter {
         container.addView(view);
         return view;
     }
-
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView( (ConstraintLayout) object );
